@@ -1,14 +1,25 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import Icon from 'react-native-vector-icons/Entypo';
 
 interface TodoProps {
   todo: string;
 }
 
 const Todo = ({todo}: TodoProps) => {
+  const [isChecked, setIsChecked] = React.useState(false);
+  const handleCheck = () => {
+    setIsChecked(prev => !prev);
+  };
   return (
-    <View style={styles.todoWrapper}>
-      <View style={styles.checkState}></View>
+    <View
+      style={
+        isChecked ? [styles.todoWrapper, styles.checked] : styles.todoWrapper
+      }
+      onTouchEnd={handleCheck}>
+      <View style={styles.checkState}>
+        {isChecked ? <Icon name="check" size={15} color="#FF7461" /> : ''}
+      </View>
       <Text style={styles.todoText}>{todo}</Text>
     </View>
   );
@@ -32,7 +43,21 @@ const styles = StyleSheet.create({
     shadowOpacity: 2,
     shadowRadius: 0,
   },
-  checkState: {},
+  checked: {
+    backgroundColor: '#e3e3e3',
+    shadowColor: '#0000004c',
+  },
+  checkState: {
+    width: 25,
+    height: 25,
+    marginRight: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 100,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#ff7461',
+  },
   todoText: {
     fontWeight: 'bold',
   },
