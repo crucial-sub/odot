@@ -12,6 +12,7 @@ const TodoInput = ({setTodos}: TodoInputProps) => {
     setValue(text);
   };
   const handleAddTodo = () => {
+    if (!value) return;
     setTodos(prev => [...prev, value]);
     setValue('');
   };
