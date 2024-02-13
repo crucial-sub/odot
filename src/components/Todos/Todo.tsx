@@ -8,14 +8,19 @@ interface TodoProps {
 
 const Todo = ({todo}: TodoProps) => {
   const [isChecked, setIsChecked] = React.useState(false);
+  const [isScrolled, setIsScrolled] = React.useState(false);
   const handleCheck = () => {
+    if (isScrolled) return;
     setIsChecked(prev => !prev);
+    setIsScrolled(false);
   };
   return (
     <View
       style={
         isChecked ? [styles.todoWrapper, styles.checked] : styles.todoWrapper
       }
+      onTouchStart={() => setIsScrolled(false)}
+      onTouchMove={() => setIsScrolled(true)}
       onTouchEnd={handleCheck}>
       <View style={styles.checkState}>
         {isChecked ? <Icon name="check" size={15} color="#FF7461" /> : ''}
