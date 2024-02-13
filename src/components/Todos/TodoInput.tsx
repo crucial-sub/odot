@@ -1,13 +1,18 @@
-import {StyleSheet, Text, TextInput, View} from 'react-native';
-import React from 'react';
+import React, {Dispatch, SetStateAction} from 'react';
+import {StyleSheet, TextInput, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const TodoInput = () => {
+interface TodoInputProps {
+  setTodos: Dispatch<SetStateAction<string[]>>;
+}
+
+const TodoInput = ({setTodos}: TodoInputProps) => {
   const [value, setValue] = React.useState('');
   const handleChangeValue = (text: string) => {
     setValue(text);
   };
   const handleAddTodo = () => {
+    setTodos(prev => [...prev, value]);
     setValue('');
   };
 
@@ -45,7 +50,8 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 2,
     shadowRadius: 0,
-    paddingLeft: 17,
+    paddingVertical: 12,
+    paddingHorizontal: 17,
   },
 });
 
