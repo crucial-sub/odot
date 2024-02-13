@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import Todo from './Todo';
 
@@ -9,7 +9,9 @@ interface TodoListProps {
 const TodoList = ({todos}: TodoListProps) => {
   console.log(todos);
   return (
-    <View style={styles.todoListWrapper}>
+    <ScrollView
+      style={styles.todoListWrapper}
+      contentContainerStyle={{gap: 15}}>
       {todos.length ? (
         todos.map((todo, i) => {
           return <Todo key={i} todo={todo} />;
@@ -17,7 +19,7 @@ const TodoList = ({todos}: TodoListProps) => {
       ) : (
         <Text>Please add something to do today!</Text>
       )}
-    </View>
+    </ScrollView>
   );
 };
 
@@ -26,6 +28,5 @@ export default TodoList;
 const styles = StyleSheet.create({
   todoListWrapper: {
     marginTop: 30,
-    gap: 15,
   },
 });
