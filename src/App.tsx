@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
   wrapper: {
     width: '90%',
     height: '100%',
+    overflow: 'hidden',
   },
 });
 
