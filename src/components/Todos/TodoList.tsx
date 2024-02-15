@@ -7,7 +7,6 @@ interface TodoListProps {
 }
 
 const TodoList = ({todos}: TodoListProps) => {
-  console.log(todos);
   return (
     <ScrollView
       style={styles.todoListWrapper}
