@@ -1,7 +1,7 @@
 import {useNavigation} from '@react-navigation/core';
 import React from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {ImageAssets} from '../../assets/images/ImageAssets';
 
 const NewTaskButton = () => {
   const navigation = useNavigation();
@@ -10,8 +10,8 @@ const NewTaskButton = () => {
     navigation.navigate('NewTask' as never);
   };
   return (
-    <TouchableOpacity onPress={handlePress} style={styles.button}>
-      <Icon name="add-circle" size={50} color="#FF7461" />
+    <TouchableOpacity onPress={handlePress} style={styles.buttonWrapper}>
+      <Image source={ImageAssets.addButton} style={styles.button} />
     </TouchableOpacity>
   );
 };
@@ -19,10 +19,12 @@ const NewTaskButton = () => {
 export default NewTaskButton;
 
 const styles = StyleSheet.create({
-  button: {
+  buttonWrapper: {
     position: 'absolute',
     bottom: 30,
     right: 20,
+  },
+  button: {
     width: 50,
     height: 50,
   },

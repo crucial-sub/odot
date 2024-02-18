@@ -1,9 +1,9 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
+import {SafeAreaView, StyleSheet} from 'react-native';
 import MainHeader from '../components/MainHeader';
-import TodoList from '../components/TodoList/TodoList';
 import NewTaskButton from '../components/NewTask/NewTaskButton';
 import ProgressBar from '../components/TodoList/ProgressBar';
+import TodoList from '../components/TodoList/TodoList';
 
 const TodoListScreen = () => {
   return (

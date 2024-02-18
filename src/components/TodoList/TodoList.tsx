@@ -2,7 +2,6 @@ import React from 'react';
 import {ScrollView, StyleSheet, Text} from 'react-native';
 import {useRecoilState} from 'recoil';
 import {TodoType, todoListState} from '../../recoil';
-import ProgressBar from './ProgressBar';
 import Todo from './Todo';
 
 const TodoList = () => {

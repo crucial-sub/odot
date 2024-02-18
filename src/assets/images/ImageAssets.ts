@@ -3,4 +3,5 @@ export const ImageAssets = {
   dartImage: require('./dart.png'),
   hamburgerImage: require('./hamburger.png'),
   backImage: require('./back.png'),
+  addButton: require('./addButton.png'),
 };
