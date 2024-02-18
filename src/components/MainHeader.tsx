@@ -32,12 +32,13 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   headerText: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: '600',
+    fontFamily: 'RacingSansOne-Regular',
   },
   profileImage: {
-    width: 35,
-    height: 35,
+    width: 25,
+    height: 25,
   },
   hamburgerImage: {
     width: 15,
