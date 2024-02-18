@@ -1,31 +1,17 @@
+import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
-import Header from './components/Header';
-import Todos from './components/Todos';
+import {SafeAreaView, StyleSheet} from 'react-native';
+import TodoListScreen from './screens/TodoListScreen';
+import MainScreen from './screens/MainScreen';
 
 function App(): React.JSX.Element {
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <View style={styles.wrapper}>
-        <Header />
-        <Todos />
-      </View>
-    </SafeAreaView>
+    <NavigationContainer>
+      <MainScreen />
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#F6FAFB',
-  },
-  wrapper: {
-    width: '90%',
-    height: '100%',
-    overflow: 'hidden',
-  },
-});
+const styles = StyleSheet.create({});
 
 export default App;
