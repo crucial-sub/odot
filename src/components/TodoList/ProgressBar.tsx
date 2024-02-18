@@ -15,7 +15,7 @@ const ProgressBar = () => {
         <View
           style={[
             styles.doneBar,
-            {width: `${(doneCount / totalCount) * 100}%`},
+            {width: totalCount ? `${(doneCount / totalCount) * 100}%` : '0%'},
           ]}></View>
       </View>
       <Text style={styles.countText}>{`${doneCount} / ${totalCount}`}</Text>

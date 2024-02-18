@@ -5,7 +5,6 @@ import {ImageAssets} from '../assets/images/ImageAssets';
 
 const StackHeader = ({title}: {title: string}) => {
   const navigation = useNavigation();
-  const [userName, setUserName] = React.useState('Crucial-Sub');
   const handleGoBack = () => {
     navigation.goBack();
   };
