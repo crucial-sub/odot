@@ -22,7 +22,7 @@ const AddTaskButton = () => {
   };
   return (
     <TouchableOpacity onPress={handleAddTask} style={styles.addTaskButton}>
-      <Text style={styles.text}>AddTaskButton</Text>
+      <Text style={styles.text}>Add Task</Text>
     </TouchableOpacity>
   );
 };
@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   text: {
-    color: '#ffffff',
+    color: '#FFFFFF',
+    fontWeight: '600',
   },
 });

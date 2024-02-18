@@ -13,7 +13,7 @@ const StackHeader = ({title}: {title: string}) => {
   return (
     <View style={styles.header}>
       <TouchableOpacity onPress={handleGoBack}>
-        <Image source={ImageAssets.backImage} style={styles.backImage} />
+        <Image source={ImageAssets.backImage} style={styles.backButton} />
       </TouchableOpacity>
       <Text style={styles.headerText}>{title}</Text>
       <View></View>
@@ -23,24 +23,18 @@ const StackHeader = ({title}: {title: string}) => {
 
 const styles = StyleSheet.create({
   header: {
-    width: '90%',
+    width: '100%',
+    paddingHorizontal: 25,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 20,
   },
   backButton: {
     width: 24,
     height: 24,
-    backgroundColor: 'red',
   },
   headerText: {
-    fontSize: 15,
     fontWeight: '600',
-  },
-  backImage: {
-    width: 15,
-    height: 15,
   },
 });
 

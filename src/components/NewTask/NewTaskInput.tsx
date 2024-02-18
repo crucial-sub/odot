@@ -10,9 +10,9 @@ const NewTaskInput = () => {
   };
 
   return (
-    <View style={styles.toDoInputWrapper}>
+    <View style={styles.taskInputWrapper}>
       <TextInput
-        style={styles.todoInput}
+        style={styles.taskInput}
         value={newTask}
         onChangeText={handleChangeValue}
         placeholder="tell me what you gonna do today!"
@@ -22,9 +22,10 @@ const NewTaskInput = () => {
 };
 
 const styles = StyleSheet.create({
-  toDoInputWrapper: {width: '100%'},
-  todoInput: {
+  taskInputWrapper: {width: '100%'},
+  taskInput: {
     borderRadius: 50,
+    height: 40,
     backgroundColor: '#ffffff',
     shadowColor: '#0000000D',
     shadowOffset: {
@@ -33,8 +34,8 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 2,
     shadowRadius: 0,
-    paddingVertical: 12,
     paddingHorizontal: 17,
+    fontWeight: '600',
   },
   addTaskButton: {
     flex: 1,
