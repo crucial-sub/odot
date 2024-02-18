@@ -1,14 +1,16 @@
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
-import TodoListScreen from './screens/TodoListScreen';
+import {StyleSheet} from 'react-native';
+import {RecoilRoot} from 'recoil';
 import MainScreen from './screens/MainScreen';
 
 function App(): React.JSX.Element {
   return (
-    <NavigationContainer>
-      <MainScreen />
-    </NavigationContainer>
+    <RecoilRoot>
+      <NavigationContainer>
+        <MainScreen />
+      </NavigationContainer>
+    </RecoilRoot>
   );
 }
 
