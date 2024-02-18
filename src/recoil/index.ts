@@ -12,7 +12,7 @@ export interface StatusType {
 
 export const todoListState = atom<TodoType[]>({
   key: 'todoListState',
-  default: [{id: Date.now(), contents: 'sample', isCompleted: false}],
+  default: [],
 });
 
 export const newTaskState = atom({
