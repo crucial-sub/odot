@@ -4,4 +4,6 @@ export const ImageAssets = {
   hamburgerImage: require('./hamburger.png'),
   backImage: require('./back.png'),
   addButton: require('./addButton.png'),
+  circleImage: require('./circle.png'),
+  circleCheckedImage: require('./circleChecked.png'),
 };

@@ -1,7 +1,8 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
 import {TodoType} from '../../recoil';
+import {ImageAssets} from '../../assets/images/ImageAssets';
 
 interface TodoProps {
   todo: TodoType;
@@ -14,12 +15,13 @@ const Todo = ({todo, handleCheck}: TodoProps) => {
   return (
     <TouchableOpacity
       onPress={() => handleCheck(todo.id)}
-      style={
-        isChecked ? [styles.todoWrapper, styles.checked] : styles.todoWrapper
-      }>
-      <View style={styles.checkState}>
-        {isChecked ? <Icon name="check" size={15} color="#FF7461" /> : ''}
-      </View>
+      style={styles.todoWrapper}>
+      <Image
+        source={
+          isChecked ? ImageAssets.circleCheckedImage : ImageAssets.circleImage
+        }
+        style={styles.checkState}
+      />
       <Text style={styles.todoText}>{todo.contents}</Text>
     </TouchableOpacity>
   );
@@ -42,23 +44,13 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 2,
     shadowRadius: 0,
-  },
-  checked: {
-    backgroundColor: '#e3e3e3',
-    shadowColor: '#0000004c',
+    gap: 15,
   },
   checkState: {
     width: 25,
     height: 25,
-    marginRight: 15,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 100,
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderColor: '#ff7461',
   },
   todoText: {
-    fontWeight: 'bold',
+    fontWeight: '600',
   },
 });
