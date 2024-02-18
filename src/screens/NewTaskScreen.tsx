@@ -1,14 +1,14 @@
 import React from 'react';
 import {Image, SafeAreaView, StyleSheet, View} from 'react-native';
 import {ImageAssets} from '../assets/images/ImageAssets';
-import Header from '../components/Header';
 import AddTaskButton from '../components/NewTask/AddTaskButton';
 import NewTaskInput from '../components/NewTask/NewTaskInput';
+import StackHeader from '../components/StackHeader';
 
 const NewTaskScreen = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
-      <Header />
+      <StackHeader title="New Task" />
       <View style={styles.wrapper}>
         <NewTaskInput />
         <Image source={ImageAssets.dartImage} style={styles.dartImage} />

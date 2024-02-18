@@ -1,13 +1,13 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
-import Header from '../components/Header';
+import MainHeader from '../components/MainHeader';
 import TodoList from '../components/TodoList/TodoList';
 import NewTaskButton from '../components/NewTask/NewTaskButton';
 
 const TodoListScreen = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
-      <Header />
+      <MainHeader />
       <View style={styles.wrapper}>
         <TodoList />
       </View>

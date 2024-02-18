@@ -7,14 +7,19 @@ const Header = () => {
 
   return (
     <View style={styles.header}>
-      <Text style={styles.headerText}>Hello {userName}👋</Text>
       <Image source={ImageAssets.profileImage} style={styles.profileImage} />
+      <Text style={styles.headerText}>ODOT</Text>
+      <Image
+        source={ImageAssets.hamburgerImage}
+        style={styles.hamburgerImage}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   header: {
+    width: '90%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -27,6 +32,10 @@ const styles = StyleSheet.create({
   profileImage: {
     width: 35,
     height: 35,
+  },
+  hamburgerImage: {
+    width: 15,
+    height: 15,
   },
 });
 
