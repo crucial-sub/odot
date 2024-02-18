@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useRecoilState, useSetRecoilState} from 'recoil';
 import {newTaskState, todoListState} from '../../recoil';
 
@@ -12,18 +12,18 @@ const AddTaskButton = () => {
       return [
         ...prev,
         {
+          id: Date.now(),
           contents: newTask,
+          isCompleted: false,
         },
       ];
     });
     setNewTask('');
   };
   return (
-    <TouchableWithoutFeedback onPress={handleAddTask}>
-      <View style={styles.addTaskButton}>
-        <Text style={styles.text}>AddTaskButton</Text>
-      </View>
-    </TouchableWithoutFeedback>
+    <TouchableOpacity onPress={handleAddTask} style={styles.addTaskButton}>
+      <Text style={styles.text}>AddTaskButton</Text>
+    </TouchableOpacity>
   );
 };
 

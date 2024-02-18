@@ -1,33 +1,27 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
 import {TodoType} from '../../recoil';
 
 interface TodoProps {
   todo: TodoType;
+  handleCheck: (id: number) => void;
 }
 
-const Todo = ({todo}: TodoProps) => {
-  const [isChecked, setIsChecked] = React.useState(false);
-  const [isScrolled, setIsScrolled] = React.useState(false);
-  const handleCheck = () => {
-    if (isScrolled) return;
-    setIsChecked(prev => !prev);
-    setIsScrolled(false);
-  };
+const Todo = ({todo, handleCheck}: TodoProps) => {
+  const isChecked = todo.isCompleted;
+
   return (
-    <View
+    <TouchableOpacity
+      onPress={() => handleCheck(todo.id)}
       style={
         isChecked ? [styles.todoWrapper, styles.checked] : styles.todoWrapper
-      }
-      onTouchStart={() => setIsScrolled(false)}
-      onTouchMove={() => setIsScrolled(true)}
-      onTouchEnd={handleCheck}>
+      }>
       <View style={styles.checkState}>
         {isChecked ? <Icon name="check" size={15} color="#FF7461" /> : ''}
       </View>
       <Text style={styles.todoText}>{todo.contents}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 

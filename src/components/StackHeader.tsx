@@ -1,8 +1,6 @@
-import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
-import {ImageAssets} from '../assets/images/ImageAssets';
-import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/core';
+import React from 'react';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 const StackHeader = ({title}: {title: string}) => {
   const navigation = useNavigation();
@@ -13,9 +11,9 @@ const StackHeader = ({title}: {title: string}) => {
 
   return (
     <View style={styles.header}>
-      <TouchableWithoutFeedback onPress={handleGoBack}>
+      <TouchableOpacity onPress={handleGoBack}>
         <View style={styles.backButton}></View>
-      </TouchableWithoutFeedback>
+      </TouchableOpacity>
       <Text style={styles.headerText}>{title}</Text>
       <View></View>
     </View>

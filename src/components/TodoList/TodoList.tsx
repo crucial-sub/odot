@@ -1,18 +1,33 @@
 import React from 'react';
 import {ScrollView, StyleSheet, Text} from 'react-native';
-import {useRecoilValue} from 'recoil';
+import {useRecoilState} from 'recoil';
 import {TodoType, todoListState} from '../../recoil';
+import ProgressBar from './ProgressBar';
 import Todo from './Todo';
 
 const TodoList = () => {
-  const todoList = useRecoilValue(todoListState);
+  const [todoList, setTodoList] = useRecoilState(todoListState);
+
+  const handleCheck = (id: number) => {
+    const newTodos = todoList.map(item => {
+      if (item.id === id) {
+        return {...item, isCompleted: !item.isCompleted};
+      }
+
+      return item;
+    });
+
+    setTodoList(newTodos);
+  };
+
   return (
     <ScrollView
       style={styles.todoListWrapper}
       contentContainerStyle={{gap: 15, paddingBottom: 100}}>
-      {todoList!.length ? (
+      <ProgressBar />
+      {todoList?.length ? (
         todoList.map((todo: TodoType, i) => {
-          return <Todo key={i} todo={todo} />;
+          return <Todo key={i} todo={todo} handleCheck={handleCheck} />;
         })
       ) : (
         <Text>Please add something to do today!</Text>

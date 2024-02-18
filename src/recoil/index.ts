@@ -1,12 +1,18 @@
-import {atom} from 'recoil';
+import {atom, selector} from 'recoil';
 
 export interface TodoType {
+  id: number;
   contents: string;
+  isCompleted: boolean;
+}
+export interface StatusType {
+  index: number;
+  status: boolean;
 }
 
 export const todoListState = atom<TodoType[]>({
   key: 'todoListState',
-  default: [{contents: 'sample'}],
+  default: [{id: Date.now(), contents: 'sample', isCompleted: false}],
 });
 
 export const newTaskState = atom({
