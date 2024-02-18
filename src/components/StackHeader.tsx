@@ -14,8 +14,9 @@ const StackHeader = ({title}: {title: string}) => {
       <TouchableOpacity onPress={handleGoBack}>
         <Image source={ImageAssets.backImage} style={styles.backButton} />
       </TouchableOpacity>
-      <Text style={styles.headerText}>{title}</Text>
-      <View></View>
+      <View style={styles.titleWrapper}>
+        <Text style={styles.headerTitle}>{title}</Text>
+      </View>
     </View>
   );
 };
@@ -25,14 +26,18 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingHorizontal: 25,
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
   },
   backButton: {
     width: 24,
     height: 24,
   },
-  headerText: {
+  titleWrapper: {
+    width: '100%',
+    alignItems: 'center',
+    paddingRight: 48,
+  },
+  headerTitle: {
     fontWeight: '600',
   },
 });
