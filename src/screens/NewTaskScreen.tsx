@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: '#F6FAFB',
+    gap: 40,
   },
   wrapper: {
     flex: 1,

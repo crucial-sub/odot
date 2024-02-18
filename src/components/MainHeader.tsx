@@ -29,11 +29,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 20,
   },
   headerText: {
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: '400',
     fontFamily: 'RacingSansOne-Regular',
   },
   profileImage: {

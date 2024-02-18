@@ -23,8 +23,7 @@ const TodoList = () => {
   return (
     <ScrollView
       style={styles.todoListWrapper}
-      contentContainerStyle={{gap: 15, paddingBottom: 100}}>
-      <ProgressBar />
+      contentContainerStyle={{gap: 25, paddingBottom: 40}}>
       {todoList?.length ? (
         todoList.map((todo: TodoType, i) => {
           return <Todo key={i} todo={todo} handleCheck={handleCheck} />;
@@ -39,5 +38,9 @@ const TodoList = () => {
 export default TodoList;
 
 const styles = StyleSheet.create({
-  todoListWrapper: {},
+  todoListWrapper: {
+    flex: 1,
+    width: '90%',
+    overflow: 'hidden',
+  },
 });

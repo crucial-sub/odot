@@ -3,14 +3,14 @@ import {SafeAreaView, StyleSheet, View} from 'react-native';
 import MainHeader from '../components/MainHeader';
 import TodoList from '../components/TodoList/TodoList';
 import NewTaskButton from '../components/NewTask/NewTaskButton';
+import ProgressBar from '../components/TodoList/ProgressBar';
 
 const TodoListScreen = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <MainHeader />
-      <View style={styles.wrapper}>
-        <TodoList />
-      </View>
+      <ProgressBar />
+      <TodoList />
       <NewTaskButton />
     </SafeAreaView>
   );
@@ -23,10 +23,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: '#F6FAFB',
-  },
-  wrapper: {
-    flex: 1,
-    width: '90%',
-    overflow: 'hidden',
+    gap: 40,
   },
 });

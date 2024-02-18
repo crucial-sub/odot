@@ -10,7 +10,7 @@ const ProgressBar = () => {
 
   return (
     <View style={styles.progressWrapper}>
-      <Text>Progress</Text>
+      <Text style={styles.progressText}>Progress</Text>
       <View style={styles.barWrapper}>
         <View
           style={[
@@ -18,7 +18,7 @@ const ProgressBar = () => {
             {width: `${(doneCount / totalCount) * 100}%`},
           ]}></View>
       </View>
-      <Text>{`${doneCount} / ${totalCount}`}</Text>
+      <Text style={styles.countText}>{`${doneCount} / ${totalCount}`}</Text>
     </View>
   );
 };
@@ -27,8 +27,7 @@ export default ProgressBar;
 
 const styles = StyleSheet.create({
   progressWrapper: {
-    height: 104,
-    justifyContent: 'center',
+    width: '90%',
     padding: 15,
     borderRadius: 12,
     backgroundColor: '#ffffff',
@@ -39,7 +38,10 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 2,
     shadowRadius: 0,
-    gap: 5,
+    gap: 15,
+  },
+  progressText: {
+    fontWeight: '500',
   },
   barWrapper: {
     width: '100%',
@@ -47,11 +49,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#D9D9D9',
     borderRadius: 50,
   },
-  totalBar: {},
   doneBar: {
     width: '0%',
     height: '100%',
     backgroundColor: '#ff7461',
     borderRadius: 50,
+  },
+  countText: {
+    fontWeight: '500',
+    color: '#C4C4C4',
   },
 });
