@@ -1,8 +1,8 @@
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import Todo from './Todo';
+import {ScrollView, StyleSheet, Text} from 'react-native';
 import {useRecoilValue} from 'recoil';
 import {TodoType, todoListState} from '../../recoil';
+import Todo from './Todo';
 
 const TodoList = () => {
   const todoList = useRecoilValue(todoListState);
@@ -24,7 +24,5 @@ const TodoList = () => {
 export default TodoList;
 
 const styles = StyleSheet.create({
-  todoListWrapper: {
-    marginTop: 30,
-  },
+  todoListWrapper: {},
 });

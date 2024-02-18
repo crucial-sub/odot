@@ -1,19 +1,39 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {Image, SafeAreaView, StyleSheet, View} from 'react-native';
+import {ImageAssets} from '../assets/images/ImageAssets';
+import Header from '../components/Header';
+import AddTaskButton from '../components/NewTask/AddTaskButton';
+import NewTaskInput from '../components/NewTask/NewTaskInput';
 
 const NewTaskScreen = () => {
   return (
-    <View style={styles.wrapper}>
-      <Text>NewTaskScreen</Text>
-    </View>
+    <SafeAreaView style={styles.safeArea}>
+      <Header />
+      <View style={styles.wrapper}>
+        <NewTaskInput />
+        <Image source={ImageAssets.dartImage} style={styles.dartImage} />
+        <AddTaskButton />
+      </View>
+    </SafeAreaView>
   );
 };
 
 export default NewTaskScreen;
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: '#F6FAFB',
+  },
   wrapper: {
     flex: 1,
-    backgroundColor: 'blue',
+    width: '90%',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  dartImage: {
+    width: 100,
+    height: 100,
   },
 });
