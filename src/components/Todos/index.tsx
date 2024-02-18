@@ -14,7 +14,6 @@ export default Todos;
 
 const styles = StyleSheet.create({
   todosWrapper: {
-    marginTop: 50,
     height: '100%',
   },
 });
