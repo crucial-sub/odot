@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {SafeAreaView, StyleSheet, View} from 'react-native';
 import MainHeader from '../components/MainHeader';
 import NewTaskButton from '../components/NewTask/NewTaskButton';
 import ProgressBar from '../components/TodoList/ProgressBar';
@@ -9,8 +9,10 @@ const TodoListScreen = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <MainHeader />
-      <ProgressBar />
-      <TodoList />
+      <View style={styles.wrapper}>
+        <ProgressBar />
+        <TodoList />
+      </View>
       <NewTaskButton />
     </SafeAreaView>
   );
@@ -23,6 +25,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: '#F6FAFB',
+    gap: 40,
+  },
+  wrapper: {
+    flex: 1,
+    width: '100%',
+    paddingHorizontal: 25,
     gap: 40,
   },
 });

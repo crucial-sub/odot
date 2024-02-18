@@ -27,7 +27,6 @@ export default ProgressBar;
 
 const styles = StyleSheet.create({
   progressWrapper: {
-    width: '90%',
     padding: 15,
     borderRadius: 12,
     backgroundColor: '#ffffff',

@@ -25,7 +25,8 @@ const Header = () => {
 
 const styles = StyleSheet.create({
   header: {
-    width: '90%',
+    width: '100%',
+    paddingHorizontal: 25,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

@@ -1,6 +1,5 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import {StyleSheet} from 'react-native';
 import MainStackNavigator from '../navigation/MainStackNavigator';
 
 const RootStack = createStackNavigator();
@@ -14,5 +13,3 @@ const MainScreen = () => {
 };
 
 export default MainScreen;
-
-const styles = StyleSheet.create({});

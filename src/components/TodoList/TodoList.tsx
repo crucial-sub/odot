@@ -39,7 +39,6 @@ export default TodoList;
 const styles = StyleSheet.create({
   todoListWrapper: {
     flex: 1,
-    width: '90%',
     overflow: 'hidden',
   },
 });

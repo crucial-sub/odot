@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   buttonWrapper: {
     position: 'absolute',
     bottom: 30,
-    right: 20,
+    right: 25,
   },
   button: {
     width: 50,
