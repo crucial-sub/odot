@@ -3,6 +3,7 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import NewTaskScreen from '../screens/NewTaskScreen';
 import TodoListScreen from '../screens/TodoListScreen';
+import TodosScreen from '../screens/TodosScreen';
 
 const MainStack = createStackNavigator();
 
@@ -13,6 +14,7 @@ const MainStackNavigator = () => {
       initialRouteName="TodoList">
       <MainStack.Screen name="TodoList" component={TodoListScreen} />
       <MainStack.Screen name="NewTask" component={NewTaskScreen} />
+      <MainStack.Screen name="Todos" component={TodosScreen} />
     </MainStack.Navigator>
   );
 };

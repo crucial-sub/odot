@@ -1,18 +1,24 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {ImageAssets} from '../assets/images/ImageAssets';
+import {useNavigation} from '@react-navigation/core';
 
 const Header = () => {
-  const [userName, setUserName] = React.useState('Crucial-Sub');
+  const navagation = useNavigation();
+  const handlePress = () => {
+    navagation.navigate('Todos' as never);
+  };
 
   return (
     <View style={styles.header}>
       <Image source={ImageAssets.profileImage} style={styles.profileImage} />
       <Text style={styles.headerText}>ODOT</Text>
-      <Image
-        source={ImageAssets.hamburgerImage}
-        style={styles.hamburgerImage}
-      />
+      <TouchableOpacity onPress={handlePress}>
+        <Image
+          source={ImageAssets.hamburgerImage}
+          style={styles.hamburgerImage}
+        />
+      </TouchableOpacity>
     </View>
   );
 };

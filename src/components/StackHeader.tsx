@@ -1,6 +1,7 @@
 import {useNavigation} from '@react-navigation/core';
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {ImageAssets} from '../assets/images/ImageAssets';
 
 const StackHeader = ({title}: {title: string}) => {
   const navigation = useNavigation();
@@ -12,7 +13,7 @@ const StackHeader = ({title}: {title: string}) => {
   return (
     <View style={styles.header}>
       <TouchableOpacity onPress={handleGoBack}>
-        <View style={styles.backButton}></View>
+        <Image source={ImageAssets.backImage} style={styles.backImage} />
       </TouchableOpacity>
       <Text style={styles.headerText}>{title}</Text>
       <View></View>
@@ -37,9 +38,9 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '600',
   },
-  profileImage: {
-    width: 35,
-    height: 35,
+  backImage: {
+    width: 15,
+    height: 15,
   },
 });
 
