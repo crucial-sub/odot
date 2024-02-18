@@ -1,18 +1,17 @@
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import Todo from './Todo';
+import {useRecoilValue} from 'recoil';
+import {TodoType, todoListState} from '../../recoil';
 
-interface TodoListProps {
-  todos: string[];
-}
-
-const TodoList = ({todos}: TodoListProps) => {
+const TodoList = () => {
+  const todoList = useRecoilValue(todoListState);
   return (
     <ScrollView
       style={styles.todoListWrapper}
       contentContainerStyle={{gap: 15, paddingBottom: 100}}>
-      {todos.length ? (
-        todos.map((todo, i) => {
+      {todoList!.length ? (
+        todoList.map((todo: TodoType, i) => {
           return <Todo key={i} todo={todo} />;
         })
       ) : (

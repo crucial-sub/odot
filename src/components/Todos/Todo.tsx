@@ -1,9 +1,10 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/Entypo';
+import {TodoType} from '../../recoil';
 
 interface TodoProps {
-  todo: string;
+  todo: TodoType;
 }
 
 const Todo = ({todo}: TodoProps) => {
@@ -25,7 +26,7 @@ const Todo = ({todo}: TodoProps) => {
       <View style={styles.checkState}>
         {isChecked ? <Icon name="check" size={15} color="#FF7461" /> : ''}
       </View>
-      <Text style={styles.todoText}>{todo}</Text>
+      <Text style={styles.todoText}>{todo.contents}</Text>
     </View>
   );
 };
