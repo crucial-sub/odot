@@ -41,8 +41,8 @@ const styles = StyleSheet.create({
     height: 25,
   },
   hamburgerImage: {
-    width: 15,
-    height: 15,
+    width: 25,
+    height: 25,
   },
 });
 
