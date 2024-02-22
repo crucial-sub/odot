@@ -4,6 +4,7 @@ export interface TodoType {
   id: number;
   contents: string;
   isCompleted: boolean;
+  date: string;
 }
 export interface StatusType {
   index: number;

@@ -1,12 +1,13 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
+import {SafeAreaView, StyleSheet} from 'react-native';
 import StackHeader from '../components/StackHeader';
+import FlatListExample from '../components/TodoFlatList/FlatListExample';
 
 const TodosScreen = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <StackHeader title="Todos" />
-      <View style={styles.wrapper}></View>
+      <FlatListExample />
     </SafeAreaView>
   );
 };
@@ -18,16 +19,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: '#F6FAFB',
-  },
-  wrapper: {
-    flex: 1,
-    width: '100%',
-    paddingHorizontal: 25,
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  dartImage: {
-    width: 100,
-    height: 100,
+    gap: 40,
   },
 });

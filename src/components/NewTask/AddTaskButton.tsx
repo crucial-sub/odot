@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {useRecoilState, useSetRecoilState} from 'recoil';
 import {newTaskState, todoListState} from '../../recoil';
+import {getDate} from '../../utils/getDate';
 
 const AddTaskButton = () => {
   const [newTask, setNewTask] = useRecoilState(newTaskState);
@@ -15,6 +16,7 @@ const AddTaskButton = () => {
           id: Date.now(),
           contents: newTask,
           isCompleted: false,
+          date: getDate(new Date()),
         },
       ];
     });
