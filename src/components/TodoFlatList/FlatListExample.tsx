@@ -7,16 +7,19 @@ type ItemType = {
   date: string;
 };
 
-const ITEMS = Array.from({length: SAMPLETODOS.length}, (_, index) => {
-  const item = SAMPLETODOS[index];
-  const totalCount = item.length;
-  const doneCount = item.filter(el => el.isCompleted).length;
+const ITEMS: ItemType[] = Array.from(
+  {length: SAMPLETODOS.length},
+  (_, index) => {
+    const item = SAMPLETODOS[index];
+    const totalCount = item.length;
+    const doneCount = item.filter(el => el.isCompleted).length;
 
-  return {
-    count: `${doneCount}/${totalCount}`,
-    date: `${item[0].date}`,
-  };
-});
+    return {
+      count: `${doneCount}/${totalCount}`,
+      date: `${item[0].date}`,
+    };
+  },
+);
 
 const TodoFlatListExample = () => {
   const renderItem = ({item}: {item: ItemType}) => {
