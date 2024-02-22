@@ -7,7 +7,7 @@ type ItemType = {
   date: string;
 };
 
-const ITEMS = Array.from({length: 100}, (_, index) => {
+const ITEMS = Array.from({length: SAMPLETODOS.length}, (_, index) => {
   const item = SAMPLETODOS[index];
   const totalCount = item.length;
   const doneCount = item.filter(el => el.isCompleted).length;
