@@ -1,11 +1,11 @@
 import {TodoType} from '../../recoil';
 import {getTransformedDate} from '../../utils/getTransformedDate';
 
-export const SAMPLETODOS = Array.from({length: 50}, (_, index) => {
+export const SAMPLETODOS = Array.from({length: 60}, (_, index) => {
   const randomLength = Math.floor(Math.random() * 4 + 1);
 
   const baseDate = new Date();
-  const newDate = new Date(baseDate.setDate(baseDate.getDate() + index));
+  const newDate = new Date(baseDate.setDate(baseDate.getDate() - index - 1));
   const date = getTransformedDate(newDate);
 
   const sampleTodoList = [];
@@ -21,7 +21,7 @@ export const SAMPLETODOS = Array.from({length: 50}, (_, index) => {
   }
 
   return sampleTodoList;
-}).reverse();
+});
 
 // SAMPLETODOS 예시
 const sampleTodos = [
