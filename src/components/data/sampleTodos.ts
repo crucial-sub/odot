@@ -1,7 +1,7 @@
 import {TodoType} from '../../recoil';
 import {getDate} from '../../utils/getDate';
 
-export const SAMPLETODOS = Array.from({length: 100}, (_, index) => {
+export const SAMPLETODOS = Array.from({length: 50}, (_, index) => {
   const randomLength = Math.floor(Math.random() * 4 + 1);
 
   const baseDate = new Date();
