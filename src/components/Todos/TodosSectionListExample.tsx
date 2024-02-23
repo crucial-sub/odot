@@ -41,9 +41,11 @@ const TodosSectionListExample = () => {
     );
   };
 
-  const keyExtractor = (_: any, index: number) => `section-list-item-${index}`;
+  const keyExtractor = (item: TodoType[]) => {
+    return `section-list-item-${item[0].id}`;
+  };
 
-  const renderSectionHeader = ({section}: {section: any}) => {
+  const renderSectionHeader = ({section}: {section: SectionType}) => {
     return (
       <View style={styles.sectionHeader}>
         <Text style={styles.sectionHeaderText}>{section.title}</Text>
