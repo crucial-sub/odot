@@ -21,7 +21,7 @@ const ITEMS: ItemType[] = Array.from(
   },
 );
 
-const TodoFlatListExample = () => {
+const TodosFlatListExample = () => {
   const renderItem = ({item}: {item: ItemType}) => {
     return (
       <View style={styles.itemWrapper}>
@@ -44,7 +44,7 @@ const TodoFlatListExample = () => {
   );
 };
 
-export default TodoFlatListExample;
+export default TodosFlatListExample;
 
 const styles = StyleSheet.create({
   wrapper: {
