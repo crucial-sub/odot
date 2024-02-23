@@ -8,7 +8,7 @@ type SectionType = {
   data: TodoType[][];
 };
 
-const SectionListExample = () => {
+const TodosSectionListExample = () => {
   const sections: SectionType[] = React.useMemo(() => {
     const titleObject: Record<string, TodoType[][]> = {};
 
@@ -62,7 +62,7 @@ const SectionListExample = () => {
   );
 };
 
-export default SectionListExample;
+export default TodosSectionListExample;
 
 const styles = StyleSheet.create({
   wrapper: {
