@@ -1,12 +1,12 @@
 import {TodoType} from '../../recoil';
-import {getDate} from '../../utils/getDate';
+import {getTransformedDate} from '../../utils/getTransformedDate';
 
 export const SAMPLETODOS = Array.from({length: 50}, (_, index) => {
   const randomLength = Math.floor(Math.random() * 4 + 1);
 
   const baseDate = new Date();
   const newDate = new Date(baseDate.setDate(baseDate.getDate() + index));
-  const date = getDate(newDate);
+  const date = getTransformedDate(newDate);
 
   const sampleTodoList = [];
   for (let i = 0; i < randomLength; i++) {

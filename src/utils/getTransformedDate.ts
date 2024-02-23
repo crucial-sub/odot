@@ -1,4 +1,4 @@
-export const getDate = (date: Date) => {
+export const getTransformedDate = (date: Date) => {
   const year = date.getFullYear();
   let month = date.getMonth() + 1;
   let day = date.getDate();
