@@ -1,4 +1,5 @@
-import {atom} from 'recoil';
+import {atom, selector} from 'recoil';
+import {SAMPLETODOS} from '../components/data/sampleTodos';
 
 export interface TodoType {
   id: number;
@@ -14,6 +15,18 @@ export interface StatusType {
 export const todoListState = atom<TodoType[]>({
   key: 'todoListState',
   default: [],
+});
+
+export const todosSelector = selector<TodoType[][]>({
+  key: 'TodosSelector',
+  get: ({get}) => {
+    const defaultTodos = SAMPLETODOS;
+    const todayTodos = get(todoListState);
+    const result = todayTodos.length
+      ? [[...todayTodos], ...defaultTodos]
+      : [...defaultTodos];
+    return result;
+  },
 });
 
 export const newTaskState = atom({

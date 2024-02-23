@@ -1,27 +1,29 @@
 import React from 'react';
 import {FlatList, StyleSheet, Text, View} from 'react-native';
-import {SAMPLETODOS} from '../data/sampleTodos';
+import {useRecoilValue} from 'recoil';
+import {todosSelector} from '../../recoil';
 
 type ItemType = {
   count: string;
   date: string;
 };
 
-const ITEMS: ItemType[] = Array.from(
-  {length: SAMPLETODOS.length},
-  (_, index) => {
-    const item = SAMPLETODOS[index];
-    const totalCount = item.length;
-    const doneCount = item.filter(el => el.isCompleted).length;
-
-    return {
-      count: `${doneCount}/${totalCount}`,
-      date: `${item[0].date}`,
-    };
-  },
-);
-
 const TodosFlatListExample = () => {
+  const todos = useRecoilValue(todosSelector);
+  const ITEMS: ItemType[] = React.useMemo(
+    () =>
+      Array.from({length: todos.length}, (_, index) => {
+        const item = todos[index];
+        const totalCount = item.length;
+        const doneCount = item.filter(el => el.isCompleted).length;
+
+        return {
+          count: `${doneCount}/${totalCount}`,
+          date: `${item[0].date}`,
+        };
+      }),
+    [todos],
+  );
   const renderItem = ({item}: {item: ItemType}) => {
     return (
       <View style={styles.itemWrapper}>

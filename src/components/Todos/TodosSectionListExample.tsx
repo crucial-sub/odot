@@ -1,7 +1,7 @@
 import React from 'react';
 import {SectionList, StyleSheet, Text, View} from 'react-native';
-import {SAMPLETODOS} from '../data/sampleTodos';
-import {TodoType} from '../../recoil';
+import {TodoType, todosSelector} from '../../recoil';
+import {useRecoilValue} from 'recoil';
 
 type SectionType = {
   title: string;
@@ -9,10 +9,11 @@ type SectionType = {
 };
 
 const TodosSectionListExample = () => {
+  const todos = useRecoilValue(todosSelector);
   const sections: SectionType[] = React.useMemo(() => {
     const titleObject: Record<string, TodoType[][]> = {};
 
-    SAMPLETODOS.forEach(item => {
+    todos.forEach(item => {
       const title = item[0].date.slice(0, 7);
 
       if (!title) return;
