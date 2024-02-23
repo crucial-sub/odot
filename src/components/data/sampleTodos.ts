@@ -22,3 +22,35 @@ export const SAMPLETODOS = Array.from({length: 100}, (_, index) => {
 
   return sampleTodoList;
 }).reverse();
+
+// SAMPLETODOS 예시
+const sampleTodos = [
+  [
+    {
+      id: 0.41525235,
+      contents: '',
+      isCompleted: true,
+      date: '2024/02/23',
+    },
+    {
+      id: 0.7235435436,
+      contents: '',
+      isCompleted: false,
+      date: '2024/02/23',
+    },
+  ],
+  [
+    {
+      id: 0.3234234,
+      contents: '',
+      isCompleted: true,
+      date: '2024/02/24',
+    },
+    {
+      id: 0.8435345,
+      contents: '',
+      isCompleted: false,
+      date: '2024/02/24',
+    },
+  ],
+];
