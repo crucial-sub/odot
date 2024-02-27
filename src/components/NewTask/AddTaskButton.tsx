@@ -3,23 +3,41 @@ import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {useRecoilState, useSetRecoilState} from 'recoil';
 import {newTaskState, todoListState} from '../../recoil';
 import {getTransformedDate} from '../../utils/getTransformedDate';
+import {getStorageData, saveStorageData} from '../../lib/storage-helper';
 
-const AddTaskButton = () => {
+interface PropsType {}
+
+const AddTaskButton = ({}: PropsType) => {
   const [newTask, setNewTask] = useRecoilState(newTaskState);
   const setTodoList = useSetRecoilState(todoListState);
   const handleAddTask = () => {
     if (!newTask) return;
-    setTodoList(prev => {
-      return [
-        ...prev,
-        {
-          id: Date.now(),
-          contents: newTask,
-          isCompleted: false,
-          date: getTransformedDate(new Date()),
-        },
-      ];
-    });
+    const addTodo = async () => {
+      const currentDate = getTransformedDate(new Date());
+      const yearMonth: string = currentDate.slice(0, 7);
+      const today = currentDate.slice(8, 10);
+      const todo = {
+        id: Date.now(),
+        contents: newTask,
+        isCompleted: false,
+        date: currentDate,
+      };
+      const monthTodos = await getStorageData(yearMonth);
+      if (!monthTodos) {
+        await saveStorageData(yearMonth, {[today]: [todo]});
+        setTodoList([todo]);
+      } else if (!monthTodos[today]) {
+        await saveStorageData(yearMonth, {...monthTodos, [today]: [todo]});
+        setTodoList([todo]);
+      } else {
+        await saveStorageData(yearMonth, {
+          ...monthTodos,
+          [today]: [...monthTodos[today], todo],
+        });
+        setTodoList([...monthTodos[today], todo]);
+      }
+    };
+    addTodo();
     setNewTask('');
   };
   return (
