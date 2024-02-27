@@ -1,4 +1,4 @@
-import {TodoType} from '../../recoil';
+import {TodoType} from '../../types';
 import {getTransformedDate} from '../../utils/getTransformedDate';
 
 export const SAMPLETODOS = Array.from({length: 60}, (_, index) => {

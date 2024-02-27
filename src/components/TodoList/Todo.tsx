@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {ImageAssets} from '../../assets/images/ImageAssets';
-import {TodoType} from '../../recoil';
+import {TodoType} from '../../types';
 
 interface TodoProps {
   todo: TodoType;
