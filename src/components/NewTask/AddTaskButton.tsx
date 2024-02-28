@@ -9,7 +9,6 @@ interface PropsType {}
 
 const AddTaskButton = ({}: PropsType) => {
   const [newTask, setNewTask] = useRecoilState(newTaskState);
-  const setTodoList = useSetRecoilState(todoListState);
   const handleAddTask = () => {
     if (!newTask) return;
     const addTodo = async () => {
@@ -25,16 +24,13 @@ const AddTaskButton = ({}: PropsType) => {
       const monthTodos = await getStorageData(yearMonth);
       if (!monthTodos) {
         await saveStorageData(yearMonth, {[today]: [todo]});
-        setTodoList([todo]);
       } else if (!monthTodos[today]) {
         await saveStorageData(yearMonth, {...monthTodos, [today]: [todo]});
-        setTodoList([todo]);
       } else {
         await saveStorageData(yearMonth, {
           ...monthTodos,
           [today]: [...monthTodos[today], todo],
         });
-        setTodoList([...monthTodos[today], todo]);
       }
     };
     addTodo();
