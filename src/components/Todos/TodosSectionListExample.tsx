@@ -19,24 +19,27 @@ const TodosSectionListExample = () => {
 
   const sections: SectionType[] = React.useMemo(
     () =>
-      Object.entries(allTodos)
-        .reverse()
-        .map(([title, data]) => {
-          return {
-            title: title,
-            data: Object.entries(data)
-              .map(([_, todoList]) => [...todoList])
-              .reverse(),
-          };
-        }),
+      Object.entries(allTodos).map(([title, data]) => {
+        return {
+          title: title,
+          data: Object.entries(data)
+            .map(([_, todoList]) => [...todoList])
+            .reverse(),
+        };
+      }),
     [allTodos],
   );
 
   React.useEffect(() => {
     const getAllTodos = async () => {
       const allItems = await getAllItems();
-      if (!allItems[yearMonth] || !allItems[yearMonth][today]) return;
-      setAllTodos(prev => ({...prev, ...allItems}));
+      const allTodos = Object.fromEntries(
+        Object.entries(allItems)
+          .filter(entry => entry[0].includes('todos-'))
+          .map(([key, value]: any) => [key.slice(6, 13), value]),
+      );
+      if (!allTodos[yearMonth] || !allTodos[yearMonth][today]) return;
+      setAllTodos(prev => ({...prev, ...allTodos}));
     };
     if (isFocused) getAllTodos();
   }, [isFocused]);

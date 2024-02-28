@@ -1,9 +1,9 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
-import {useRecoilState, useSetRecoilState} from 'recoil';
-import {newTaskState, todoListState} from '../../recoil';
-import {getTransformedDate} from '../../utils/getTransformedDate';
+import {useRecoilState} from 'recoil';
 import {getStorageData, saveStorageData} from '../../lib/storage-helper';
+import {newTaskState} from '../../recoil';
+import {getTransformedDate} from '../../utils/getTransformedDate';
 
 interface PropsType {}
 
@@ -21,13 +21,16 @@ const AddTaskButton = ({}: PropsType) => {
         isCompleted: false,
         date: currentDate,
       };
-      const monthTodos = await getStorageData(yearMonth);
+      const monthTodos = await getStorageData('todos-' + yearMonth);
       if (!monthTodos) {
-        await saveStorageData(yearMonth, {[today]: [todo]});
+        await saveStorageData('todos-' + yearMonth, {[today]: [todo]});
       } else if (!monthTodos[today]) {
-        await saveStorageData(yearMonth, {...monthTodos, [today]: [todo]});
+        await saveStorageData('todos-' + yearMonth, {
+          ...monthTodos,
+          [today]: [todo],
+        });
       } else {
-        await saveStorageData(yearMonth, {
+        await saveStorageData('todos-' + yearMonth, {
           ...monthTodos,
           [today]: [...monthTodos[today], todo],
         });

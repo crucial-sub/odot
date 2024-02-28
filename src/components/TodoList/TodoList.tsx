@@ -26,19 +26,26 @@ const TodoList = () => {
       }
       return item;
     });
-    const monthTodos: MonthTodosType = await getStorageData(yearMonth);
+    const monthTodos: MonthTodosType = await getStorageData(
+      'todos-' + yearMonth,
+    );
     const updatedTodos: MonthTodosType = {
       ...monthTodos,
       [today]: [...newTodos],
     };
-    await saveStorageData(yearMonth, updatedTodos);
+    await saveStorageData('todos-' + yearMonth, updatedTodos);
     setTodoList(newTodos);
   };
   React.useEffect(() => {
     const getAllTodos = async () => {
       const allItems = await getAllItems();
-      if (!allItems[yearMonth] || !allItems[yearMonth][today]) return;
-      setTodoList(allItems[yearMonth][today]);
+      const allTodos = Object.fromEntries(
+        Object.entries(allItems)
+          .filter(entry => entry[0].includes('todos-'))
+          .map(([key, value]: any) => [key.slice(6, 13), value]),
+      );
+      if (!allTodos[yearMonth] || !allTodos[yearMonth][today]) return;
+      setTodoList(allTodos[yearMonth][today]);
     };
     if (isFocused) getAllTodos();
   }, [isFocused]);

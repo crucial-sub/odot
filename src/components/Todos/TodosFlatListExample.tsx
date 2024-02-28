@@ -21,7 +21,7 @@ const TodosFlatListExample = () => {
   const ITEMS: ItemType[] = React.useMemo(
     () =>
       Array.from({length: allTodosArray.length}, (_, index) => {
-        const item = allTodosArray[index];
+        const item = allTodosArray[allTodosArray.length - index - 1];
         const totalCount = item.length;
         const doneCount = item.filter(el => el.isCompleted).length;
 
@@ -29,15 +29,21 @@ const TodosFlatListExample = () => {
           count: `${doneCount}/${totalCount}`,
           date: `${item[0].date}`,
         };
-      }).reverse(),
+      }),
     [allTodos],
   );
 
   React.useEffect(() => {
     const getAllTodos = async () => {
       const allItems = await getAllItems();
-      if (!allItems[yearMonth] || !allItems[yearMonth][today]) return;
-      setAllTodos(allItems);
+      const allTodos = Object.fromEntries(
+        Object.entries(allItems)
+          .filter(entry => entry[0].includes('todos-'))
+          .map(([key, value]: any) => [key.slice(6, 13), value])
+          .reverse(),
+      );
+      if (!allTodos[yearMonth] || !allTodos[yearMonth][today]) return;
+      setAllTodos(allTodos);
     };
     getAllTodos();
   }, []);
