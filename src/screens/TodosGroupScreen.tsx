@@ -1,18 +1,18 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
 import StackHeader from '../components/StackHeader';
-import ListTypeSelectionBar from '../components/Todos/ListTypeSelectionBar';
+import TodosSectionList from '../components/Todos/TodosSectionList';
 
-const TodosScreen = () => {
+const TodosGroupScreen = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StackHeader title="Todos" />
-      <ListTypeSelectionBar />
+      <StackHeader title="TodosGroup" />
+      <TodosSectionList />
     </SafeAreaView>
   );
 };
 
-export default TodosScreen;
+export default TodosGroupScreen;
 
 const styles = StyleSheet.create({
   safeArea: {

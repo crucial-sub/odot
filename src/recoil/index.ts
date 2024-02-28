@@ -1,5 +1,4 @@
 import {atom, selector} from 'recoil';
-import {SAMPLETODOS} from '../components/data/sampleTodos';
 import {AllTodosType, TodoType} from '../types';
 
 export const todoListState = atom<TodoType[]>({
@@ -10,7 +9,7 @@ export const todoListState = atom<TodoType[]>({
 export const todosSelector = selector<TodoType[][]>({
   key: 'TodosSelector',
   get: ({get}) => {
-    const defaultTodos = SAMPLETODOS;
+    const defaultTodos: any = [];
     const todayTodos = get(todoListState);
     const result = todayTodos.length
       ? [[...todayTodos], ...defaultTodos]

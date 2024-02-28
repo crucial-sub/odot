@@ -6,7 +6,7 @@ import {useNavigation} from '@react-navigation/core';
 const Header = () => {
   const navagation = useNavigation();
   const handlePress = () => {
-    navagation.navigate('Todos' as never);
+    navagation.navigate('TodosGroup' as never);
   };
 
   return (
