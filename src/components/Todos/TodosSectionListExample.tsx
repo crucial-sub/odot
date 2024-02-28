@@ -19,14 +19,16 @@ const TodosSectionListExample = () => {
 
   const sections: SectionType[] = React.useMemo(
     () =>
-      Object.entries(allTodos).map(([title, data]) => {
-        return {
-          title: title,
-          data: Object.entries(data)
-            .map(([_, todoList]) => [...todoList])
-            .reverse(),
-        };
-      }),
+      Object.entries(allTodos)
+        .reverse()
+        .map(([title, data]) => {
+          return {
+            title: title,
+            data: Object.entries(data)
+              .map(([_, todoList]) => [...todoList])
+              .reverse(),
+          };
+        }),
     [allTodos],
   );
 
