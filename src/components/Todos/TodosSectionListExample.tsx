@@ -1,7 +1,8 @@
 import React from 'react';
 import {SectionList, StyleSheet, Text, View} from 'react-native';
-import {TodoType, todosSelector} from '../../recoil';
 import {useRecoilValue} from 'recoil';
+import {allTodosSelector} from '../../recoil';
+import {AllTodosType, TodoType} from '../../types';
 
 type SectionType = {
   title: string;
@@ -9,27 +10,19 @@ type SectionType = {
 };
 
 const TodosSectionListExample = () => {
-  const todos = useRecoilValue(todosSelector);
-  const sections: SectionType[] = React.useMemo(() => {
-    const titleObject: Record<string, TodoType[][]> = {};
+  const allTodos = useRecoilValue(allTodosSelector);
 
-    todos.forEach(item => {
-      const title = item[0].date.slice(0, 7);
+  const sections: SectionType[] = React.useMemo(
+    () =>
+      Object.entries(allTodos).map(([title, data]) => {
+        return {
+          title: title,
+          data: Object.entries(data).map(([_, todoList]) => [...todoList]),
+        };
+      }),
+    [],
+  );
 
-      if (!title) return;
-
-      if (!titleObject[title]) {
-        titleObject[title] = [[...item]];
-      } else {
-        titleObject[title]!.push([...item]);
-      }
-    });
-
-    return Object.entries(titleObject).map(([title, data]) => ({
-      title,
-      data,
-    }));
-  }, []);
   const renderItem = ({item}: {item: TodoType[]}) => {
     const totalCount = item.length;
     const doneCount = item.filter(el => el.isCompleted).length;
@@ -108,37 +101,37 @@ const styles = StyleSheet.create({
 });
 
 // TitleObject 예시
-const sampleTitleObject: Record<string, TodoType[][]> = {
-  '2024/02': [
-    [
+const sampleTitleObject: AllTodosType = {
+  '2024/02': {
+    '27': [
       {
         id: 0.41525235,
         contents: '',
         isCompleted: true,
-        date: '2024/02/23',
+        date: '2024/02/27',
       },
       {
         id: 0.7235435436,
         contents: '',
         isCompleted: false,
-        date: '2024/02/23',
+        date: '2024/02/27',
       },
     ],
-    [
+    '28': [
       {
         id: 0.3234234,
         contents: '',
         isCompleted: true,
-        date: '2024/02/24',
+        date: '2024/02/28',
       },
       {
         id: 0.8435345,
         contents: '',
         isCompleted: false,
-        date: '2024/02/24',
+        date: '2024/02/28',
       },
     ],
-  ],
+  },
 };
 
 // sections 예시
@@ -151,13 +144,13 @@ const sampleSections: SectionType[] = [
           id: 0.41525235,
           contents: '',
           isCompleted: true,
-          date: '2024/02/23',
+          date: '2024/02/27',
         },
         {
           id: 0.7235435436,
           contents: '',
           isCompleted: false,
-          date: '2024/02/23',
+          date: '2024/02/27',
         },
       ],
       [
@@ -165,13 +158,13 @@ const sampleSections: SectionType[] = [
           id: 0.3234234,
           contents: '',
           isCompleted: true,
-          date: '2024/02/24',
+          date: '2024/02/28',
         },
         {
           id: 0.8435345,
           contents: '',
           isCompleted: false,
-          date: '2024/02/24',
+          date: '2024/02/28',
         },
       ],
     ],

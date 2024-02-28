@@ -1,16 +1,6 @@
 import {atom, selector} from 'recoil';
 import {SAMPLETODOS} from '../components/data/sampleTodos';
-
-export interface TodoType {
-  id: number;
-  contents: string;
-  isCompleted: boolean;
-  date: string;
-}
-export interface StatusType {
-  index: number;
-  status: boolean;
-}
+import {AllTodosType, TodoType} from '../types';
 
 export const todoListState = atom<TodoType[]>({
   key: 'todoListState',
@@ -26,6 +16,32 @@ export const todosSelector = selector<TodoType[][]>({
       ? [[...todayTodos], ...defaultTodos]
       : [...defaultTodos];
     return result;
+  },
+});
+
+export const allTodosState = atom<AllTodosType>({
+  key: 'allTodosState',
+  default: {},
+});
+
+export const allTodosSelector = selector<AllTodosType>({
+  key: 'allTodosSelector',
+  get: async ({get}) => {
+    const defaultAllTodos = get(allTodosState);
+    const todayTodos = get(todoListState);
+    if (todayTodos.length) {
+      const todayYearMonth = todayTodos[0].date.slice(0, 7);
+      const todayDate = todayTodos[0].date.slice(8, 10);
+      return {
+        ...defaultAllTodos,
+        ...{
+          [todayYearMonth]: {
+            ...defaultAllTodos[todayYearMonth],
+            [todayDate]: [...todayTodos],
+          },
+        },
+      };
+    } else return {...defaultAllTodos};
   },
 });
 
