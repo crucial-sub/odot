@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {AllTodosType, MonthTodosType} from '../types';
+import {MonthTodosType} from '../types';
 
 export const saveStorageData = async (key: string, value: MonthTodosType) => {
   const valueString = JSON.stringify(value);
@@ -23,4 +23,17 @@ export const removeStorageData = async (key: string) => {
 
 export const clearStorageData = async () => {
   AsyncStorage.clear();
+};
+
+export const getAllItems = async () => {
+  const allItems: any = {};
+  const keys = await AsyncStorage.getAllKeys();
+  await AsyncStorage.multiGet(keys, (err, items) =>
+    items!.map((result, i, item) => {
+      let key = item[i][0];
+      let value = item[i][1];
+      allItems[key] = JSON.parse(value!);
+    }),
+  );
+  return allItems;
 };
