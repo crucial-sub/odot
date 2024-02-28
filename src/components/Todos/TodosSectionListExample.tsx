@@ -1,8 +1,9 @@
+import {useIsFocused} from '@react-navigation/native';
 import React from 'react';
 import {SectionList, StyleSheet, Text, View} from 'react-native';
-import {useRecoilValue} from 'recoil';
-import {allTodosSelector} from '../../recoil';
+import {getAllItems} from '../../lib/storage-helper';
 import {AllTodosType, TodoType} from '../../types';
+import {getTransformedDate} from '../../utils/getTransformedDate';
 
 type SectionType = {
   title: string;
@@ -10,18 +11,33 @@ type SectionType = {
 };
 
 const TodosSectionListExample = () => {
-  const allTodos = useRecoilValue(allTodosSelector);
+  const isFocused = useIsFocused();
+  const currentDate = getTransformedDate(new Date());
+  const yearMonth: string = currentDate.slice(0, 7);
+  const today = currentDate.slice(8, 10);
+  const [allTodos, setAllTodos] = React.useState<AllTodosType>({});
 
   const sections: SectionType[] = React.useMemo(
     () =>
       Object.entries(allTodos).map(([title, data]) => {
         return {
           title: title,
-          data: Object.entries(data).map(([_, todoList]) => [...todoList]),
+          data: Object.entries(data)
+            .map(([_, todoList]) => [...todoList])
+            .reverse(),
         };
       }),
-    [],
+    [allTodos],
   );
+
+  React.useEffect(() => {
+    const getAllTodos = async () => {
+      const allItems = await getAllItems();
+      if (!allItems[yearMonth] || !allItems[yearMonth][today]) return;
+      setAllTodos(prev => ({...prev, ...allItems}));
+    };
+    if (isFocused) getAllTodos();
+  }, [isFocused]);
 
   const renderItem = ({item}: {item: TodoType[]}) => {
     const totalCount = item.length;

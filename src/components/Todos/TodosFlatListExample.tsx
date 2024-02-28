@@ -1,8 +1,8 @@
 import React from 'react';
 import {FlatList, StyleSheet, Text, View} from 'react-native';
-import {useRecoilValue} from 'recoil';
-import {allTodosSelector, todosSelector} from '../../recoil';
-import {TodoType} from '../../types';
+import {getAllItems} from '../../lib/storage-helper';
+import {AllTodosType, TodoType} from '../../types';
+import {getTransformedDate} from '../../utils/getTransformedDate';
 
 type ItemType = {
   count: string;
@@ -10,7 +10,10 @@ type ItemType = {
 };
 
 const TodosFlatListExample = () => {
-  const allTodos = useRecoilValue(allTodosSelector);
+  const currentDate = getTransformedDate(new Date());
+  const yearMonth: string = currentDate.slice(0, 7);
+  const today = currentDate.slice(8, 10);
+  const [allTodos, setAllTodos] = React.useState<AllTodosType>({});
   const allTodosArray: TodoType[][] = [];
   Object.values(allTodos).forEach(el =>
     allTodosArray.push(...Object.values(el)),
@@ -26,9 +29,19 @@ const TodosFlatListExample = () => {
           count: `${doneCount}/${totalCount}`,
           date: `${item[0].date}`,
         };
-      }),
+      }).reverse(),
     [allTodos],
   );
+
+  React.useEffect(() => {
+    const getAllTodos = async () => {
+      const allItems = await getAllItems();
+      if (!allItems[yearMonth] || !allItems[yearMonth][today]) return;
+      setAllTodos(allItems);
+    };
+    getAllTodos();
+  }, []);
+
   const renderItem = ({item}: {item: ItemType}) => {
     return (
       <View style={styles.itemWrapper}>
