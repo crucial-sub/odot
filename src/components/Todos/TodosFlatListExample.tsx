@@ -1,7 +1,8 @@
 import React from 'react';
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import {useRecoilValue} from 'recoil';
-import {todosSelector} from '../../recoil';
+import {allTodosSelector, todosSelector} from '../../recoil';
+import {TodoType} from '../../types';
 
 type ItemType = {
   count: string;
@@ -9,11 +10,15 @@ type ItemType = {
 };
 
 const TodosFlatListExample = () => {
-  const todos = useRecoilValue(todosSelector);
+  const allTodos = useRecoilValue(allTodosSelector);
+  const allTodosArray: TodoType[][] = [];
+  Object.values(allTodos).forEach(el =>
+    allTodosArray.push(...Object.values(el)),
+  );
   const ITEMS: ItemType[] = React.useMemo(
     () =>
-      Array.from({length: todos.length}, (_, index) => {
-        const item = todos[index];
+      Array.from({length: allTodosArray.length}, (_, index) => {
+        const item = allTodosArray[index];
         const totalCount = item.length;
         const doneCount = item.filter(el => el.isCompleted).length;
 
@@ -22,7 +27,7 @@ const TodosFlatListExample = () => {
           date: `${item[0].date}`,
         };
       }),
-    [todos],
+    [allTodos],
   );
   const renderItem = ({item}: {item: ItemType}) => {
     return (
