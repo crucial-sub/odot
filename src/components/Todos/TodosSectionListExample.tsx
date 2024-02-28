@@ -1,7 +1,13 @@
-import {useIsFocused} from '@react-navigation/native';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {SectionList, StyleSheet, Text, View} from 'react-native';
-import {getAllItems} from '../../lib/storage-helper';
+import {
+  SectionList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {getAllItems, saveStorageData} from '../../lib/storage-helper';
 import {AllTodosType, TodoType} from '../../types';
 import {getTransformedDate} from '../../utils/getTransformedDate';
 
@@ -11,6 +17,7 @@ type SectionType = {
 };
 
 const TodosSectionListExample = () => {
+  const navigation = useNavigation();
   const isFocused = useIsFocused();
   const currentDate = getTransformedDate(new Date());
   const yearMonth: string = currentDate.slice(0, 7);
@@ -29,6 +36,10 @@ const TodosSectionListExample = () => {
       }),
     [allTodos],
   );
+  const handleDayTodos = async (date: string) => {
+    await saveStorageData('selected-date', date);
+    navigation.navigate('TodoList' as never);
+  };
 
   React.useEffect(() => {
     const getAllTodos = async () => {
@@ -48,10 +59,12 @@ const TodosSectionListExample = () => {
     const totalCount = item.length;
     const doneCount = item.filter(el => el.isCompleted).length;
     return (
-      <View style={styles.itemWrapper}>
-        <Text style={styles.itemDate}>{item[0].date}</Text>
-        <Text style={styles.itemCount}>{`${doneCount}/${totalCount}`}</Text>
-      </View>
+      <TouchableOpacity onPress={() => handleDayTodos(item[0].date)}>
+        <View style={styles.itemWrapper}>
+          <Text style={styles.itemDate}>{item[0].date}</Text>
+          <Text style={styles.itemCount}>{`${doneCount}/${totalCount}`}</Text>
+        </View>
+      </TouchableOpacity>
     );
   };
 

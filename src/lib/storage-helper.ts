@@ -1,7 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {MonthTodosType} from '../types';
 
-export const saveStorageData = async (key: string, value: MonthTodosType) => {
+export const saveStorageData = async (key: string, value: any) => {
   const valueString = JSON.stringify(value);
 
   AsyncStorage.setItem(key, valueString);

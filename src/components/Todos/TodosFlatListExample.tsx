@@ -1,8 +1,9 @@
 import React from 'react';
-import {FlatList, StyleSheet, Text, View} from 'react-native';
-import {getAllItems} from '../../lib/storage-helper';
+import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {getAllItems, saveStorageData} from '../../lib/storage-helper';
 import {AllTodosType, TodoType} from '../../types';
 import {getTransformedDate} from '../../utils/getTransformedDate';
+import {useNavigation} from '@react-navigation/native';
 
 type ItemType = {
   count: string;
@@ -10,6 +11,7 @@ type ItemType = {
 };
 
 const TodosFlatListExample = () => {
+  const navigation = useNavigation();
   const currentDate = getTransformedDate(new Date());
   const yearMonth: string = currentDate.slice(0, 7);
   const today = currentDate.slice(8, 10);
@@ -33,6 +35,11 @@ const TodosFlatListExample = () => {
     [allTodos],
   );
 
+  const handleDayTodos = async (date: string) => {
+    await saveStorageData('selected-date', date);
+    navigation.navigate('TodoList' as never);
+  };
+
   React.useEffect(() => {
     const getAllTodos = async () => {
       const allItems = await getAllItems();
@@ -50,10 +57,12 @@ const TodosFlatListExample = () => {
 
   const renderItem = ({item}: {item: ItemType}) => {
     return (
-      <View style={styles.itemWrapper}>
-        <Text style={styles.itemDate}>{item.date}</Text>
-        <Text style={styles.itemCount}>{item.count}</Text>
-      </View>
+      <TouchableOpacity onPress={() => handleDayTodos(item.date)}>
+        <View style={styles.itemWrapper}>
+          <Text style={styles.itemDate}>{item.date}</Text>
+          <Text style={styles.itemCount}>{item.count}</Text>
+        </View>
+      </TouchableOpacity>
     );
   };
   const keyExtractor = (item: ItemType) => `flat-list-item-${item.date}`;
