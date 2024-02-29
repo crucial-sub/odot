@@ -58,7 +58,7 @@ const TodosDetail = () => {
       setTodoList(allTodos[yearMonth][today]);
     };
     getAllTodos();
-  }, [selectedDate, isFocused]);
+  }, [selectedDate]);
 
   return (
     <ScrollView
