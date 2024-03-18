@@ -1,5 +1,19 @@
 import {atom, selector} from 'recoil';
-import {AllTodosType, TodoType} from '../types';
+
+export interface TodoType {
+  id: number;
+  contents: string;
+  isCompleted: boolean;
+  date: string;
+}
+
+export interface MonthTodosType {
+  [date: string]: TodoType[];
+}
+
+export interface AllTodosType {
+  [yearMonth: string]: MonthTodosType;
+}
 
 export const todoListState = atom<TodoType[]>({
   key: 'todoListState',

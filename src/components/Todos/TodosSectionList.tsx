@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 import {getAllItems, saveStorageData} from '../../lib/storage-helper';
-import {AllTodosType, TodoType} from '../../types';
+import {AllTodosType, TodoType} from '../../recoil';
 import {getTransformedDate} from '../../utils/getTransformedDate';
 
 type SectionType = {
