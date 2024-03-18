@@ -32,7 +32,12 @@ const ToastMessage = () => {
           <ToastIcon type={type} />
           <View style={styles.textBox}>
             <Text style={styles.toastTitle}>{title}</Text>
-            <Text style={styles.messageText}>{message}</Text>
+            <Text
+              style={styles.messageText}
+              numberOfLines={2}
+              ellipsizeMode="tail">
+              {message}
+            </Text>
           </View>
         </Animated.View>
       )}
@@ -59,7 +64,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     gap: 15,
   },
-  textBox: {gap: 3},
+  textBox: {gap: 3, flex: 1},
   toastTitle: {
     fontWeight: '700',
     fontSize: 16,
