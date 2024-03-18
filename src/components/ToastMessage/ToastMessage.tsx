@@ -1,6 +1,9 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import Animated from 'react-native-reanimated';
+import Animated, {
+  LightSpeedInLeft,
+  LightSpeedOutRight,
+} from 'react-native-reanimated';
 import {useRecoilValue} from 'recoil';
 import {toastState, toastVisibleState} from '../../recoil';
 import useToastMessage from '../hooks/useToastMessage';
@@ -19,16 +22,21 @@ const ToastMessage = () => {
     setIsVisible(toastVisible);
   }, [toastVisible]);
 
-  if (!isVisible) return null;
-
   return (
-    <Animated.View style={[styles.toastWrapper, getToastStyle(type)]}>
-      <ToastIcon type={type} />
-      <View style={styles.textBox}>
-        <Text style={styles.toastTitle}>{title}</Text>
-        <Text style={styles.messageText}>{message}</Text>
-      </View>
-    </Animated.View>
+    <View style={styles.toastWrapper}>
+      {isVisible && (
+        <Animated.View
+          style={[styles.animatedToastWrapper, getToastStyle(type)]}
+          entering={LightSpeedInLeft}
+          exiting={LightSpeedOutRight}>
+          <ToastIcon type={type} />
+          <View style={styles.textBox}>
+            <Text style={styles.toastTitle}>{title}</Text>
+            <Text style={styles.messageText}>{message}</Text>
+          </View>
+        </Animated.View>
+      )}
+    </View>
   );
 };
 
@@ -37,11 +45,13 @@ export default ToastMessage;
 const styles = StyleSheet.create({
   toastWrapper: {
     position: 'absolute',
-    width: TOAST_SIZE,
-    height: 70,
     top: 60,
     left: '50%',
     transform: [{translateX: -TOAST_SIZE / 2}],
+  },
+  animatedToastWrapper: {
+    width: TOAST_SIZE,
+    height: 70,
     borderRadius: 12,
     borderWidth: 2,
     flexDirection: 'row',
