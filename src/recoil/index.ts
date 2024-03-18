@@ -62,3 +62,23 @@ export const newTaskState = atom({
   key: 'newTaskState',
   default: '',
 });
+
+export const toastVisibleState = atom({
+  key: 'toastVisibleState',
+  default: false,
+});
+
+export type ToastType = 'success' | 'error' | 'warning' | 'info';
+
+export interface ToastMessageType {
+  type: ToastType;
+  message: string;
+}
+
+export const toastState = atom<ToastMessageType>({
+  key: 'toastState',
+  default: {
+    type: '' as ToastType,
+    message: '',
+  },
+});
