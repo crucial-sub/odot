@@ -7,8 +7,7 @@ import {
   getStorageData,
   saveStorageData,
 } from '../../lib/storage-helper';
-import {todoListState} from '../../recoil';
-import {MonthTodosType, TodoType} from '../../types';
+import {MonthTodosType, TodoType, todoListState} from '../../recoil';
 import {getTransformedDate} from '../../utils/getTransformedDate';
 import Todo from './Todo';
 

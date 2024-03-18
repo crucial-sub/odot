@@ -1,5 +1,19 @@
 import {atom, selector} from 'recoil';
-import {AllTodosType, TodoType} from '../types';
+
+export interface TodoType {
+  id: number;
+  contents: string;
+  isCompleted: boolean;
+  date: string;
+}
+
+export interface MonthTodosType {
+  [date: string]: TodoType[];
+}
+
+export interface AllTodosType {
+  [yearMonth: string]: MonthTodosType;
+}
 
 export const todoListState = atom<TodoType[]>({
   key: 'todoListState',
@@ -47,4 +61,24 @@ export const allTodosSelector = selector<AllTodosType>({
 export const newTaskState = atom({
   key: 'newTaskState',
   default: '',
+});
+
+export const toastVisibleState = atom({
+  key: 'toastVisibleState',
+  default: false,
+});
+
+export type ToastType = 'success' | 'error' | 'warning' | 'info';
+
+export interface ToastMessageType {
+  type: ToastType;
+  message: string;
+}
+
+export const toastState = atom<ToastMessageType>({
+  key: 'toastState',
+  default: {
+    type: '' as ToastType,
+    message: '',
+  },
 });
