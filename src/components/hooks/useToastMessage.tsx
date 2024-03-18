@@ -1,8 +1,6 @@
-import {useRecoilState} from 'recoil';
-import {toastState, toastVisibleState} from '../../recoil';
-import {ToastType} from '../../recoil';
 import React from 'react';
-import {ViewStyle} from 'react-native';
+import {useRecoilState} from 'recoil';
+import {ToastType, toastState, toastVisibleState} from '../../recoil';
 
 const useToastMessage = () => {
   const [toastVisible, setToastVisible] = useRecoilState(toastVisibleState);
@@ -16,30 +14,18 @@ const useToastMessage = () => {
     setToastVisible(false);
   };
 
-  const getToastStyle = (type: ToastType) => {
+  const getToastColor = (type: ToastType) => {
     switch (type) {
       case 'success':
-        return {
-          backgroundColor: '#F1F8F4',
-          borderColor: '#CFE8D4',
-        } as ViewStyle;
+        return '#00DFA2';
       case 'error':
-        return {
-          backgroundColor: '#FBEFEB',
-          borderColor: '#F0CEC3',
-        } as ViewStyle;
+        return '#E84545';
       case 'warning':
-        return {
-          backgroundColor: '#FEF8EB',
-          borderColor: '#F6E0B4',
-        } as ViewStyle;
+        return '#FFBF23';
       case 'info':
-        return {
-          backgroundColor: '#E6EFFA',
-          borderColor: '#B4CDEF',
-        } as ViewStyle;
+        return '#3286EA';
       default:
-        return {};
+        return '';
     }
   };
 
@@ -58,7 +44,7 @@ const useToastMessage = () => {
   return {
     showToast,
     hideToast,
-    getToastStyle,
+    getToastColor,
   };
 };
 

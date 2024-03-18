@@ -6,13 +6,11 @@ import Animated, {
 } from 'react-native-reanimated';
 import {useRecoilValue} from 'recoil';
 import {toastState, toastVisibleState} from '../../recoil';
-import useToastMessage from '../hooks/useToastMessage';
 import ToastIcon from './ToastIcon';
 
-const TOAST_SIZE = 340;
+const TOAST_SIZE = 345;
 
 const ToastMessage = () => {
-  const {getToastStyle} = useToastMessage();
   const toastVisible = useRecoilValue(toastVisibleState);
   const {type, message} = useRecoilValue(toastState);
   const [isVisible, setIsVisible] = React.useState(false);
@@ -26,15 +24,14 @@ const ToastMessage = () => {
     <View style={styles.toastWrapper}>
       {isVisible && (
         <Animated.View
-          style={[styles.animatedToastWrapper, getToastStyle(type)]}
+          style={[styles.animatedToastWrapper]}
           entering={LightSpeedInLeft}
           exiting={LightSpeedOutRight}>
           <ToastIcon type={type} />
           <View style={styles.textBox}>
-            <Text style={styles.toastTitle}>{title}</Text>
             <Text
               style={styles.messageText}
-              numberOfLines={2}
+              numberOfLines={1}
               ellipsizeMode="tail">
               {message}
             </Text>
@@ -56,21 +53,24 @@ const styles = StyleSheet.create({
   },
   animatedToastWrapper: {
     width: TOAST_SIZE,
-    height: 70,
-    borderRadius: 12,
-    borderWidth: 2,
+    height: 45,
+    borderRadius: 8,
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 12,
-    gap: 15,
+    gap: 10,
+    backgroundColor: '#FFFFFF',
+    shadowColor: '#00000026',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 8,
+    shadowRadius: 0,
   },
-  textBox: {gap: 3, flex: 1},
-  toastTitle: {
-    fontWeight: '700',
-    fontSize: 16,
-    color: '#333439',
-  },
+  textBox: {flex: 1},
   messageText: {
-    color: '#626463',
+    fontWeight: '500',
+    fontSize: 12,
   },
 });

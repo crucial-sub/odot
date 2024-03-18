@@ -1,48 +1,29 @@
 import React from 'react';
-import {StyleSheet, View, ViewStyle} from 'react-native';
-import ErrorIcon from '../../assets/images/error-bg-white.svg';
-import InfoIcon from '../../assets/images/info-bg-white.svg';
-import SuccessIcon from '../../assets/images/success-bg-white.svg';
-import WarningIcon from '../../assets/images/warning-bg-white.svg';
+import {StyleSheet, View} from 'react-native';
+import FailIcon from '../../assets/images/fail.svg';
+import InfoIcon from '../../assets/images/info.svg';
+import SuccessIcon from '../../assets/images/success.svg';
+import WarningIcon from '../../assets/images/warning.svg';
 import {ToastType} from '../../recoil';
+import useToastMessage from '../hooks/useToastMessage';
 
 type PropsType = {
   type: ToastType;
 };
 
 const ToastIcon = ({type}: PropsType) => {
-  const getToastBg = () => {
-    let toastBg = '';
-    if (type === 'success') toastBg = '#51DC6D';
-    else if (type === 'error') toastBg = '#FC5758';
-    else if (type === 'warning') toastBg = '#FFBF23';
-    else if (type === 'info') toastBg = '#3286EA';
-
-    return {
-      backgroundColor: toastBg,
-    } as ViewStyle;
-  };
+  const {getToastColor} = useToastMessage();
 
   return (
-    <View style={[styles.iconBox, getToastBg()]}>
+    <View style={styles.iconBox}>
       {type === 'success' ? (
-        <SuccessIcon
-          width={25}
-          height={25}
-          stroke={'#51DC6D'}
-          fill={'#51DC6D'}
-        />
+        <SuccessIcon width={20} height={20} fill={getToastColor(type)} />
       ) : type === 'error' ? (
-        <ErrorIcon width={25} height={25} stroke={'#FC5758'} fill={'#FC5758'} />
+        <FailIcon width={20} height={20} fill={getToastColor(type)} />
       ) : type === 'warning' ? (
-        <WarningIcon
-          width={25}
-          height={25}
-          stroke={'#FFBF23'}
-          fill={'#FFBF23'}
-        />
+        <WarningIcon width={20} height={20} fill={getToastColor(type)} />
       ) : type === 'info' ? (
-        <InfoIcon width={25} height={25} stroke={'#3286EA'} fill={'#3286EA'} />
+        <InfoIcon width={20} height={20} fill={getToastColor(type)} />
       ) : null}
     </View>
   );
@@ -52,9 +33,8 @@ export default ToastIcon;
 
 const styles = StyleSheet.create({
   iconBox: {
-    width: 40,
-    height: 40,
-    borderRadius: 100,
+    width: 24,
+    height: 24,
     justifyContent: 'center',
     alignItems: 'center',
   },

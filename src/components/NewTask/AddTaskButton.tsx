@@ -42,7 +42,7 @@ const AddTaskButton = ({}: PropsType) => {
       }
     };
     addTodo();
-    showToast('success', 'New todo added successfully!');
+    showToast('success', 'The task has been added successfully!');
     setNewTask('');
   };
   return (
