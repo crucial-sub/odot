@@ -4,13 +4,18 @@ import {useRecoilState} from 'recoil';
 import {getStorageData, saveStorageData} from '../../lib/storage-helper';
 import {newTaskState} from '../../recoil';
 import {getTransformedDate} from '../../utils/getTransformedDate';
+import useToastMessage from '../hooks/useToastMessage';
 
 interface PropsType {}
 
 const AddTaskButton = ({}: PropsType) => {
   const [newTask, setNewTask] = useRecoilState(newTaskState);
+  const {showToast} = useToastMessage();
   const handleAddTask = () => {
-    if (!newTask) return;
+    if (!newTask) {
+      showToast('warning', 'Please enter what you gonna do today!');
+      return;
+    }
     const addTodo = async () => {
       const currentDate = getTransformedDate(new Date());
       const yearMonth: string = currentDate.slice(0, 7);
@@ -37,6 +42,7 @@ const AddTaskButton = ({}: PropsType) => {
       }
     };
     addTodo();
+    showToast('success', 'New todo added successfully!');
     setNewTask('');
   };
   return (
