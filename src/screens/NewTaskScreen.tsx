@@ -1,5 +1,6 @@
 import React from 'react';
-import {Image, SafeAreaView, StyleSheet, View} from 'react-native';
+import {SafeAreaView, StyleSheet, View} from 'react-native';
+import FastImage from 'react-native-fast-image';
 import {ImageAssets} from '../assets/images/ImageAssets';
 import AddTaskButton from '../components/NewTask/AddTaskButton';
 import NewTaskInput from '../components/NewTask/NewTaskInput';
@@ -11,7 +12,7 @@ const NewTaskScreen = () => {
       <StackHeader title="New Task" />
       <View style={styles.wrapper}>
         <NewTaskInput />
-        <Image source={ImageAssets.dartImage} style={styles.dartImage} />
+        <FastImage source={ImageAssets.dartImage} style={styles.dartImage} />
         <AddTaskButton />
       </View>
     </SafeAreaView>

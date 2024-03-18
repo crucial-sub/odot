@@ -1,7 +1,8 @@
-import React from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {ImageAssets} from '../assets/images/ImageAssets';
 import {useNavigation} from '@react-navigation/core';
+import React from 'react';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import FastImage from 'react-native-fast-image';
+import {ImageAssets} from '../assets/images/ImageAssets';
 import HamburgerIcon from '../assets/images/hamburger.svg';
 
 const Header = () => {
@@ -12,7 +13,10 @@ const Header = () => {
 
   return (
     <View style={styles.header}>
-      <Image source={ImageAssets.profileImage} style={styles.profileImage} />
+      <FastImage
+        source={ImageAssets.profileImage}
+        style={styles.profileImage}
+      />
       <Text style={styles.headerText}>ODOT</Text>
       <TouchableOpacity onPress={handlePress} style={styles.hamburgerImage}>
         <HamburgerIcon width={20} height={20} />
