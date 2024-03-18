@@ -1,7 +1,7 @@
 import {useNavigation} from '@react-navigation/core';
 import React from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {ImageAssets} from '../assets/images/ImageAssets';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import BackIcon from '../assets/images/back.svg';
 
 const StackHeader = ({title}: {title: string}) => {
   const navigation = useNavigation();
@@ -11,8 +11,8 @@ const StackHeader = ({title}: {title: string}) => {
 
   return (
     <View style={styles.header}>
-      <TouchableOpacity onPress={handleGoBack}>
-        <Image source={ImageAssets.backImage} style={styles.backButton} />
+      <TouchableOpacity onPress={handleGoBack} style={styles.buttonWrapper}>
+        <BackIcon />
       </TouchableOpacity>
       <View style={styles.titleWrapper}>
         <Text style={styles.headerTitle}>{title}</Text>
@@ -28,9 +28,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  backButton: {
+  buttonWrapper: {
     width: 24,
     height: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   titleWrapper: {
     width: '100%',

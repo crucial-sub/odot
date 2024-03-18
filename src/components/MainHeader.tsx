@@ -2,6 +2,7 @@ import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {ImageAssets} from '../assets/images/ImageAssets';
 import {useNavigation} from '@react-navigation/core';
+import HamburgerIcon from '../assets/images/hamburger.svg';
 
 const Header = () => {
   const navagation = useNavigation();
@@ -13,11 +14,8 @@ const Header = () => {
     <View style={styles.header}>
       <Image source={ImageAssets.profileImage} style={styles.profileImage} />
       <Text style={styles.headerText}>ODOT</Text>
-      <TouchableOpacity onPress={handlePress}>
-        <Image
-          source={ImageAssets.hamburgerImage}
-          style={styles.hamburgerImage}
-        />
+      <TouchableOpacity onPress={handlePress} style={styles.hamburgerImage}>
+        <HamburgerIcon width={20} height={20} />
       </TouchableOpacity>
     </View>
   );
@@ -43,6 +41,8 @@ const styles = StyleSheet.create({
   hamburgerImage: {
     width: 25,
     height: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

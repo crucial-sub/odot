@@ -1,7 +1,8 @@
 import React from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity} from 'react-native';
-import {ImageAssets} from '../../assets/images/ImageAssets';
-import {TodoType} from '../../types';
+import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import CircleCheckedIcon from '../../assets/images/circle-checked.svg';
+import CircleIcon from '../../assets/images/circle.svg';
+import {TodoType} from '../../recoil';
 
 interface TodoProps {
   todo: TodoType;
@@ -15,12 +16,11 @@ const Todo = ({todo, handleCheck}: TodoProps) => {
     <TouchableOpacity
       onPress={() => handleCheck(todo.id)}
       style={styles.todoWrapper}>
-      <Image
-        source={
-          isChecked ? ImageAssets.circleCheckedImage : ImageAssets.circleImage
-        }
-        style={styles.checkState}
-      />
+      {isChecked ? (
+        <CircleCheckedIcon width={25} height={25} />
+      ) : (
+        <CircleIcon width={25} height={25} />
+      )}
       <Text style={styles.todoText}>{todo.contents}</Text>
     </TouchableOpacity>
   );
@@ -44,10 +44,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 2,
     shadowRadius: 0,
     gap: 15,
-  },
-  checkState: {
-    width: 25,
-    height: 25,
   },
   todoText: {
     fontWeight: '600',

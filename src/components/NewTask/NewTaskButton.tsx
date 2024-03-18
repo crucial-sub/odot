@@ -1,7 +1,7 @@
 import {useNavigation} from '@react-navigation/core';
 import React from 'react';
-import {Image, StyleSheet, TouchableOpacity} from 'react-native';
-import {ImageAssets} from '../../assets/images/ImageAssets';
+import {StyleSheet, TouchableOpacity} from 'react-native';
+import AddButtonIcon from '../../assets/images/add-button.svg';
 
 const NewTaskButton = () => {
   const navigation = useNavigation();
@@ -11,7 +11,7 @@ const NewTaskButton = () => {
   };
   return (
     <TouchableOpacity onPress={handlePress} style={styles.buttonWrapper}>
-      <Image source={ImageAssets.addButton} style={styles.button} />
+      <AddButtonIcon width={50} height={50} />
     </TouchableOpacity>
   );
 };
@@ -23,9 +23,5 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 30,
     right: 25,
-  },
-  button: {
-    width: 50,
-    height: 50,
   },
 });
