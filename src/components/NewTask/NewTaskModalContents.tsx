@@ -13,7 +13,7 @@ const NewTaskModalContents = () => {
   );
 };
 
-export default NewTaskModalContents;
+export default React.memo(NewTaskModalContents);
 
 const styles = StyleSheet.create({
   wrapper: {

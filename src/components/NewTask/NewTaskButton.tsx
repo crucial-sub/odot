@@ -1,8 +1,7 @@
-import {useNavigation} from '@react-navigation/core';
 import React from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
-import AddButtonIcon from '../../assets/images/add-button.svg';
 import {useSetRecoilState} from 'recoil';
+import AddButtonIcon from '../../assets/images/add-button.svg';
 import {bottomSheetVisibleState} from '../../recoil';
 
 const NewTaskButton = () => {
@@ -18,7 +17,7 @@ const NewTaskButton = () => {
   );
 };
 
-export default NewTaskButton;
+export default React.memo(NewTaskButton);
 
 const styles = StyleSheet.create({
   buttonWrapper: {
