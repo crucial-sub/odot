@@ -44,7 +44,7 @@ const TodosSectionList = () => {
     };
 
     loadTodoList();
-  }, []);
+  }, [isFocused]);
 
   const renderItem = ({item}: {item: TodoType[]}) => {
     const totalCount = item.length;

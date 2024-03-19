@@ -32,7 +32,7 @@ export const newTaskState = atom({
   default: '',
 });
 
-export const selectedDate = atom({
+export const selectedDateState = atom({
   key: 'selected-date',
   default: '',
 });
