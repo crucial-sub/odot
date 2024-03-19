@@ -26,18 +26,32 @@ const ModalBottomSheet = ({children}: PropsType) => {
 
   const translateY = useSharedValue(SHEET_HEIGHT);
   const opacity = useSharedValue(0);
+
   React.useEffect(() => {
     if (isVisibleRecoilState) {
       setIsVisible(true);
-      opacity.value = withTiming(1, {duration: 300});
-      translateY.value = withTiming(0, {duration: 300});
-    } else {
-      opacity.value = withTiming(0, {duration: 300});
-      translateY.value = withTiming(SHEET_HEIGHT, {duration: 300}, () => {
-        runOnJS(setIsVisible)(false);
+      opacity.value = withTiming(1, {
+        duration: 300,
       });
+      translateY.value = withTiming(0, {
+        duration: 300,
+      });
+    } else {
+      opacity.value = withTiming(0, {
+        duration: 300,
+      });
+      translateY.value = withTiming(
+        SHEET_HEIGHT,
+        {
+          duration: 300,
+        },
+        () => {
+          runOnJS(setIsVisible)(false);
+        },
+      );
     }
   }, [isVisibleRecoilState, opacity, translateY]);
+
   const scrimAnimatedStyle = useAnimatedStyle(() => {
     return {
       opacity: opacity.value,
