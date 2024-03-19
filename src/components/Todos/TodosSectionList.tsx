@@ -7,8 +7,9 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {getAllTodoList, saveStorageData} from '../../lib/storage-helper';
-import {AllTodosType, TodoType} from '../../recoil';
+import {useSetRecoilState} from 'recoil';
+import {getAllTodoList} from '../../lib/storage-helper';
+import {AllTodosType, TodoType, selectedDateState} from '../../recoil';
 
 type SectionType = {
   title: string;
@@ -19,18 +20,25 @@ const TodosSectionList = () => {
   const navigation = useNavigation();
   const isFocused = useIsFocused();
   const [sections, setSections] = React.useState<SectionType[]>([]);
+  const setSelectedDate = useSetRecoilState(selectedDateState);
 
   const handleDayTodos = async (date: string) => {
-    await saveStorageData('selected-date', date);
+    setSelectedDate(date);
     navigation.navigate('TodosDetail' as never);
   };
 
   React.useEffect(() => {
     const loadTodoList = async () => {
       const allTodoList = await getAllTodoList();
-      const sections: SectionType[] = Object.keys(allTodoList).map(key => ({
+      const sortedMonthKeys = Object.keys(allTodoList).sort((a, b) =>
+        b.localeCompare(a),
+      );
+
+      const sections: SectionType[] = sortedMonthKeys.map(key => ({
         title: key,
-        data: Object.entries(allTodoList[key]).map(([_, todos]) => [...todos]),
+        data: Object.entries(allTodoList[key])
+          .map(([_, todos]) => [...todos])
+          .sort((a, b) => b[0].date.localeCompare(a[0].date)),
       }));
       setSections(sections);
     };
