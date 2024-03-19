@@ -16,18 +16,18 @@ type PropsType = {
 };
 
 const ModalBottomSheet = ({children}: PropsType) => {
-  const [visibleState, setVisibleState] = useRecoilState(
+  const [isVisibleRecoilState, setIsVisibleRecoilState] = useRecoilState(
     bottomSheetVisibleState,
   );
-  const [isVisible, setIsVisible] = React.useState(visibleState);
+  const [isVisible, setIsVisible] = React.useState(isVisibleRecoilState);
   const handlePress = () => {
-    setVisibleState(false);
+    setIsVisibleRecoilState(false);
   };
 
   const translateY = useSharedValue(SHEET_HEIGHT);
   const opacity = useSharedValue(0);
   React.useEffect(() => {
-    if (visibleState) {
+    if (isVisibleRecoilState) {
       setIsVisible(true);
       opacity.value = withTiming(1, {duration: 300});
       translateY.value = withTiming(0, {duration: 300});
@@ -37,7 +37,7 @@ const ModalBottomSheet = ({children}: PropsType) => {
         runOnJS(setIsVisible)(false);
       });
     }
-  }, [visibleState, opacity, translateY]);
+  }, [isVisibleRecoilState, opacity, translateY]);
   const scrimAnimatedStyle = useAnimatedStyle(() => {
     return {
       opacity: opacity.value,
