@@ -22,26 +22,14 @@ const NewTaskInput = () => {
 };
 
 const styles = StyleSheet.create({
-  taskInputWrapper: {width: '100%'},
-  taskInput: {
-    borderRadius: 50,
-    height: 40,
-    backgroundColor: '#ffffff',
-    shadowColor: '#0000000D',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 2,
-    shadowRadius: 0,
-    paddingHorizontal: 17,
-    fontWeight: '600',
-  },
-  addTaskButton: {
-    flex: 1,
+  taskInputWrapper: {
     width: '100%',
-    height: 45,
-    backgroundColor: '#FF7461',
+    height: 236,
+    gap: 10,
+  },
+  taskInput: {
+    backgroundColor: '#ffffff',
+    fontWeight: '600',
   },
 });
 

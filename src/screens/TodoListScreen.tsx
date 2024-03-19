@@ -5,6 +5,7 @@ import NewTaskButton from '../components/NewTask/NewTaskButton';
 import ProgressBar from '../components/TodoList/ProgressBar';
 import TodoList from '../components/TodoList/TodoList';
 import ModalBottomSheet from '../components/BottomSheet/ModalBottomSheet';
+import NewTaskModalContents from '../components/NewTask/NewTaskModalContents';
 
 const TodoListScreen = () => {
   return (
@@ -18,9 +19,7 @@ const TodoListScreen = () => {
         <NewTaskButton />
       </SafeAreaView>
       <ModalBottomSheet>
-        <View>
-          <Text>bottomSheet</Text>
-        </View>
+        <NewTaskModalContents />
       </ModalBottomSheet>
     </>
   );
