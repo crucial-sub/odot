@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ReactElement} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import Animated, {
   runOnJS,
@@ -11,7 +11,11 @@ import {bottomSheetVisibleState} from '../../recoil';
 
 const SHEET_HEIGHT = 401;
 
-const ModalBottomSheet = ({children}: any) => {
+type PropsType = {
+  children: ReactElement;
+};
+
+const ModalBottomSheet = ({children}: PropsType) => {
   const [visibleState, setVisibleState] = useRecoilState(
     bottomSheetVisibleState,
   );
