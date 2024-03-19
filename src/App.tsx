@@ -1,10 +1,9 @@
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import {RecoilRoot} from 'recoil';
-import MainScreen from './screens/MainScreen';
-import {RecoilEnv} from 'recoil';
+import {RecoilEnv, RecoilRoot} from 'recoil';
 import ToastMessage from './components/ToastMessage/ToastMessage';
+import MainScreen from './screens/MainScreen';
 
 RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 

@@ -1,20 +1,28 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import MainHeader from '../components/MainHeader';
 import NewTaskButton from '../components/NewTask/NewTaskButton';
 import ProgressBar from '../components/TodoList/ProgressBar';
 import TodoList from '../components/TodoList/TodoList';
+import ModalBottomSheet from '../components/BottomSheet/ModalBottomSheet';
 
 const TodoListScreen = () => {
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <MainHeader />
-      <View style={styles.wrapper}>
-        <ProgressBar />
-        <TodoList />
-      </View>
-      <NewTaskButton />
-    </SafeAreaView>
+    <>
+      <SafeAreaView style={styles.safeArea}>
+        <MainHeader />
+        <View style={styles.wrapper}>
+          <ProgressBar />
+          <TodoList />
+        </View>
+        <NewTaskButton />
+      </SafeAreaView>
+      <ModalBottomSheet>
+        <View>
+          <Text>bottomSheet</Text>
+        </View>
+      </ModalBottomSheet>
+    </>
   );
 };
 

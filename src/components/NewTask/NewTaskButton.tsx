@@ -2,12 +2,14 @@ import {useNavigation} from '@react-navigation/core';
 import React from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import AddButtonIcon from '../../assets/images/add-button.svg';
+import {useSetRecoilState} from 'recoil';
+import {bottomSheetVisibleState} from '../../recoil';
 
 const NewTaskButton = () => {
-  const navigation = useNavigation();
+  const setBottomSheetVisible = useSetRecoilState(bottomSheetVisibleState);
 
   const handlePress = () => {
-    navigation.navigate('NewTask' as never);
+    setBottomSheetVisible(true);
   };
   return (
     <TouchableOpacity onPress={handlePress} style={styles.buttonWrapper}>

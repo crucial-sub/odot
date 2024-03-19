@@ -82,3 +82,8 @@ export const toastState = atom<ToastMessageType>({
     message: '',
   },
 });
+
+export const bottomSheetVisibleState = atom({
+  key: 'bottomSheetVisibleState',
+  default: false,
+});
