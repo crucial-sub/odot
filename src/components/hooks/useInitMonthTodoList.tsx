@@ -2,7 +2,7 @@ import {useEffect} from 'react';
 import {useSetRecoilState} from 'recoil';
 import {getStorageData} from '../../lib/storage-helper';
 import {MonthTodoListType, monthTodoListState} from '../../recoil';
-import {getTransformedDate} from '../../utils/getTransformedDate';
+import {getCurrentDateItems} from '../../utils';
 
 const useInitMonthTodoList = () => {
   const setMonthTodoList = useSetRecoilState(monthTodoListState);
@@ -10,8 +10,7 @@ const useInitMonthTodoList = () => {
   useEffect(() => {
     const loadCurrentMonthTodos = async () => {
       try {
-        const currentDate = getTransformedDate(new Date());
-        const currentMonthKey: string = currentDate.slice(0, 7);
+        const {currentMonthKey} = getCurrentDateItems();
         const storedMonthTodoList: MonthTodoListType = await getStorageData(
           'todos-' + currentMonthKey,
         );

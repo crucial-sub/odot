@@ -7,7 +7,7 @@ import {
   monthTodoListState,
   newTaskState,
 } from '../../recoil';
-import {getTransformedDate} from '../../utils/getTransformedDate';
+import {getCurrentDateItems} from '../../utils';
 import useToastMessage from '../hooks/useToastMessage';
 
 interface PropsType {}
@@ -23,9 +23,7 @@ const AddTaskButton = ({}: PropsType) => {
       return;
     }
     const addTodo = async () => {
-      const currentDate = getTransformedDate(new Date());
-      const currentMonthKey: string = currentDate.slice(0, 7);
-      const today = currentDate.slice(8, 10);
+      const {currentDate, currentMonthKey, currentDay} = getCurrentDateItems();
       const todo = {
         id: Date.now(),
         contents: newTask,
@@ -37,16 +35,16 @@ const AddTaskButton = ({}: PropsType) => {
       );
       let newList: MonthTodoListType;
       if (!storedMonthTodoList) {
-        newList = {[today]: [todo]};
-      } else if (!storedMonthTodoList[today]) {
+        newList = {[currentDay]: [todo]};
+      } else if (!storedMonthTodoList[currentDay]) {
         newList = {
           ...storedMonthTodoList,
-          [today]: [todo],
+          [currentDay]: [todo],
         };
       } else {
         newList = {
           ...storedMonthTodoList,
-          [today]: [...storedMonthTodoList[today], todo],
+          [currentDay]: [...storedMonthTodoList[currentDay], todo],
         };
       }
       await saveStorageData('todos-' + currentMonthKey, newList);

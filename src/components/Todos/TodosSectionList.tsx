@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {getAllItems, saveStorageData} from '../../lib/storage-helper';
 import {AllTodosType, TodoType} from '../../recoil';
-import {getTransformedDate} from '../../utils/getTransformedDate';
+import {getCurrentDateItems} from '../../utils';
 
 type SectionType = {
   title: string;
@@ -19,9 +19,7 @@ type SectionType = {
 const TodosSectionList = () => {
   const navigation = useNavigation();
   const isFocused = useIsFocused();
-  const currentDate = getTransformedDate(new Date());
-  const yearMonth: string = currentDate.slice(0, 7);
-  const today = currentDate.slice(8, 10);
+  const {currentDate, currentMonthKey, currentDay} = getCurrentDateItems();
   const [allTodos, setAllTodos] = React.useState<AllTodosType>({});
 
   const sections: SectionType[] = React.useMemo(
@@ -49,7 +47,8 @@ const TodosSectionList = () => {
           .filter(entry => entry[0].includes('todos-'))
           .map(([key, value]: any) => [key.slice(6, 13), value]),
       );
-      if (!allTodos[yearMonth] || !allTodos[yearMonth][today]) return;
+      if (!allTodos[currentMonthKey] || !allTodos[currentMonthKey][currentDay])
+        return;
       setAllTodos(prev => ({...prev, ...allTodos}));
     };
     if (isFocused) getAllTodos();

@@ -8,35 +8,37 @@ import {
   monthTodoListState,
   todoListState,
 } from '../../recoil';
-import {getTransformedDate} from '../../utils/getTransformedDate';
 import useInitMonthTodoList from '../hooks/useInitMonthTodoList';
 import Todo from './Todo';
+import {getCurrentDateItems} from '../../utils';
 
 const TodoList = () => {
   useInitMonthTodoList();
   const [monthTodoList, setMonthTodoList] = useRecoilState(monthTodoListState);
   const [todoList, setTodoList] = useRecoilState(todoListState);
-  const currentDate = getTransformedDate(new Date());
-  const currentMonthKey: string = currentDate.slice(0, 7);
-  const today = currentDate.slice(8, 10);
-
+  const {currentMonthKey, currentDay} = getCurrentDateItems();
   const handleCheck = async (id: number) => {
     const newTodoList = todoList.map(item =>
-      item.id === id ? {...item, isCompleted: !item.isCompleted} : item,
+      item.id === id
+        ? {
+            ...item,
+            isCompleted: !item.isCompleted,
+          }
+        : item,
     );
     const storedMonthTodoList: MonthTodoListType = await getStorageData(
       'todos-' + currentMonthKey,
     );
     const updatedMonthTodoList: MonthTodoListType = {
       ...storedMonthTodoList,
-      [today]: [...newTodoList],
+      [currentDay]: [...newTodoList],
     };
     await saveStorageData('todos-' + currentMonthKey, updatedMonthTodoList);
     setMonthTodoList(updatedMonthTodoList);
   };
 
   React.useEffect(() => {
-    const currentTodoList = monthTodoList[today];
+    const currentTodoList = monthTodoList[currentDay];
     setTodoList(currentTodoList);
   }, [monthTodoList]);
 
