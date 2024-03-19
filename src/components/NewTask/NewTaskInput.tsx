@@ -16,6 +16,7 @@ const NewTaskInput = () => {
         value={newTask}
         onChangeText={handleChangeValue}
         placeholder="tell me what you gonna do today!"
+        multiline={true}
       />
     </View>
   );
@@ -25,11 +26,10 @@ const styles = StyleSheet.create({
   taskInputWrapper: {
     width: '100%',
     height: 236,
-    gap: 10,
   },
   taskInput: {
-    backgroundColor: '#ffffff',
     fontWeight: '600',
+    lineHeight: 18,
   },
 });
 
