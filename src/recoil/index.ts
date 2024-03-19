@@ -1,3 +1,4 @@
+import {ReactElement} from 'react';
 import {atom, selector} from 'recoil';
 
 export interface TodoType {
@@ -83,7 +84,13 @@ export const toastState = atom<ToastMessageType>({
   },
 });
 
-export const bottomSheetVisibleState = atom({
-  key: 'bottom-sheet-visible-state',
-  default: false,
+//BottomSheet State
+export interface BottomSheetType {
+  isGlobalVisible: boolean;
+  content: ReactElement | null;
+}
+
+export const bottomSheetState = atom<BottomSheetType>({
+  key: 'bottom-sheet-state',
+  default: {isGlobalVisible: false, content: null},
 });

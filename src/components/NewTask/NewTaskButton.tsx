@@ -1,14 +1,14 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
-import {useSetRecoilState} from 'recoil';
 import AddButtonIcon from '../../assets/images/add-button.svg';
-import {bottomSheetVisibleState} from '../../recoil';
+import useBottomSheet from '../hooks/useBottomSheet';
+import NewTaskModalContents from './NewTaskModalContents';
 
 const NewTaskButton = () => {
-  const setBottomSheetVisible = useSetRecoilState(bottomSheetVisibleState);
+  const {showBottomSheet} = useBottomSheet();
 
   const handlePress = () => {
-    setBottomSheetVisible(true);
+    showBottomSheet(<NewTaskModalContents />);
   };
   return (
     <TouchableOpacity onPress={handlePress} style={styles.buttonWrapper}>

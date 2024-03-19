@@ -1,4 +1,4 @@
-import React, {ReactElement} from 'react';
+import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import Animated, {
   runOnJS,
@@ -6,30 +6,26 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import {useRecoilState} from 'recoil';
-import {bottomSheetVisibleState} from '../../recoil';
+import {useRecoilValue} from 'recoil';
+import {bottomSheetState} from '../../recoil';
+import useBottomSheet from '../hooks/useBottomSheet';
 
 const SHEET_HEIGHT = 401;
 
-type PropsType = {
-  children: ReactElement;
-};
-
-const ModalBottomSheet = ({children}: PropsType) => {
-  const [isVisibleRecoilState, setIsVisibleRecoilState] = useRecoilState(
-    bottomSheetVisibleState,
-  );
-  const [isVisible, setIsVisible] = React.useState(isVisibleRecoilState);
+const ModalBottomSheet = () => {
+  const {isGlobalVisible, content} = useRecoilValue(bottomSheetState);
+  const [isLocalVisible, setIsLocalVisible] = React.useState(isGlobalVisible);
+  const {hideBottomSheet} = useBottomSheet();
   const handlePress = () => {
-    setIsVisibleRecoilState(false);
+    hideBottomSheet();
   };
 
   const translateY = useSharedValue(SHEET_HEIGHT);
   const opacity = useSharedValue(0);
 
   React.useEffect(() => {
-    if (isVisibleRecoilState) {
-      setIsVisible(true);
+    if (isGlobalVisible) {
+      setIsLocalVisible(true);
       opacity.value = withTiming(1, {
         duration: 300,
       });
@@ -46,11 +42,11 @@ const ModalBottomSheet = ({children}: PropsType) => {
           duration: 300,
         },
         () => {
-          runOnJS(setIsVisible)(false);
+          runOnJS(setIsLocalVisible)(false);
         },
       );
     }
-  }, [isVisibleRecoilState, opacity, translateY]);
+  }, [isGlobalVisible, opacity, translateY]);
 
   const scrimAnimatedStyle = useAnimatedStyle(() => {
     return {
@@ -64,7 +60,7 @@ const ModalBottomSheet = ({children}: PropsType) => {
     };
   });
 
-  if (!isVisible) return null;
+  if (!isLocalVisible) return null;
 
   return (
     <View style={styles.wrapper}>
@@ -72,7 +68,7 @@ const ModalBottomSheet = ({children}: PropsType) => {
         <TouchableOpacity style={styles.flexOne} onPressOut={handlePress} />
       </Animated.View>
       <Animated.View style={[styles.sheetWrapper, sheetAnimatedStyle]}>
-        {children}
+        {content}
       </Animated.View>
     </View>
   );

@@ -4,6 +4,7 @@ import {StyleSheet} from 'react-native';
 import {RecoilRoot} from 'recoil';
 import ToastMessage from './components/ToastMessage/ToastMessage';
 import MainScreen from './screens/MainScreen';
+import ModalBottomSheet from './components/BottomSheet/ModalBottomSheet';
 
 function App(): React.JSX.Element {
   return (
@@ -11,6 +12,7 @@ function App(): React.JSX.Element {
       <NavigationContainer>
         <MainScreen />
         <ToastMessage />
+        <ModalBottomSheet />
       </NavigationContainer>
     </RecoilRoot>
   );
