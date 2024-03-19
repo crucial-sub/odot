@@ -10,7 +10,7 @@ const NewTaskInput = () => {
   };
 
   return (
-    <View style={styles.taskInputWrapper}>
+    <View style={styles.wrapper}>
       <TextInput
         style={styles.taskInput}
         value={newTask}
@@ -23,7 +23,7 @@ const NewTaskInput = () => {
 };
 
 const styles = StyleSheet.create({
-  taskInputWrapper: {
+  wrapper: {
     width: '100%',
     height: 236,
   },
