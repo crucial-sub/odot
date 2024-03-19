@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {AllTodosType} from '../recoil';
 
 export const saveStorageData = async (key: string, value: any) => {
   const valueString = JSON.stringify(value);
@@ -24,15 +25,19 @@ export const clearStorageData = async () => {
   AsyncStorage.clear();
 };
 
-export const getAllItems = async () => {
-  const allItems: any = {};
+export const getAllTodoList = async () => {
+  const allItems: AllTodosType = {};
   const keys = await AsyncStorage.getAllKeys();
-  await AsyncStorage.multiGet(keys, (err, items) =>
-    items!.map((result, i, item) => {
-      let key = item[i][0];
-      let value = item[i][1];
-      allItems[key] = JSON.parse(value!);
-    }),
+  const filteredKeys = keys.filter(key => key.includes('todos-'));
+  await AsyncStorage.multiGet(
+    filteredKeys,
+    (err, items) =>
+      items &&
+      items.map((result, i, item) => {
+        let key = item[i][0].slice(6, 13);
+        let value = item[i][1];
+        value && (allItems[key] = JSON.parse(value));
+      }),
   );
   return allItems;
 };

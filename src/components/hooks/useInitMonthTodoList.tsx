@@ -8,7 +8,7 @@ const useInitMonthTodoList = () => {
   const setMonthTodoList = useSetRecoilState(monthTodoListState);
 
   useEffect(() => {
-    const loadCurrentMonthTodos = async () => {
+    const loadCurrentMonthTodoList = async () => {
       try {
         const {currentMonthKey} = getCurrentDateItems();
         const storedMonthTodoList: MonthTodoListType = await getStorageData(
@@ -18,11 +18,11 @@ const useInitMonthTodoList = () => {
           setMonthTodoList(storedMonthTodoList);
         }
       } catch (error) {
-        console.error('Failed to load the todo list from AsyncStorage:', error);
+        console.error('Failed to load the todo list from AsyncStorage', error);
       }
     };
 
-    loadCurrentMonthTodos();
+    loadCurrentMonthTodoList();
   }, [setMonthTodoList]);
 };
 

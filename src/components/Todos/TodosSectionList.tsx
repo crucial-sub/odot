@@ -7,9 +7,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {getAllItems, saveStorageData} from '../../lib/storage-helper';
+import {getAllTodoList, saveStorageData} from '../../lib/storage-helper';
 import {AllTodosType, TodoType} from '../../recoil';
-import {getCurrentDateItems} from '../../utils';
 
 type SectionType = {
   title: string;
@@ -19,40 +18,25 @@ type SectionType = {
 const TodosSectionList = () => {
   const navigation = useNavigation();
   const isFocused = useIsFocused();
-  const {currentDate, currentMonthKey, currentDay} = getCurrentDateItems();
-  const [allTodos, setAllTodos] = React.useState<AllTodosType>({});
+  const [sections, setSections] = React.useState<SectionType[]>([]);
 
-  const sections: SectionType[] = React.useMemo(
-    () =>
-      Object.entries(allTodos).map(([title, data]) => {
-        return {
-          title: title,
-          data: Object.entries(data)
-            .map(([_, todoList]) => [...todoList])
-            .reverse(),
-        };
-      }),
-    [allTodos],
-  );
   const handleDayTodos = async (date: string) => {
     await saveStorageData('selected-date', date);
     navigation.navigate('TodosDetail' as never);
   };
 
   React.useEffect(() => {
-    const getAllTodos = async () => {
-      const allItems = await getAllItems();
-      const allTodos = Object.fromEntries(
-        Object.entries(allItems)
-          .filter(entry => entry[0].includes('todos-'))
-          .map(([key, value]: any) => [key.slice(6, 13), value]),
-      );
-      if (!allTodos[currentMonthKey] || !allTodos[currentMonthKey][currentDay])
-        return;
-      setAllTodos(prev => ({...prev, ...allTodos}));
+    const loadTodoList = async () => {
+      const allTodoList = await getAllTodoList();
+      const sections: SectionType[] = Object.keys(allTodoList).map(key => ({
+        title: key,
+        data: Object.entries(allTodoList[key]).map(([_, todos]) => [...todos]),
+      }));
+      setSections(sections);
     };
-    if (isFocused) getAllTodos();
-  }, [isFocused]);
+
+    loadTodoList();
+  }, []);
 
   const renderItem = ({item}: {item: TodoType[]}) => {
     const totalCount = item.length;
