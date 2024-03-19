@@ -14,7 +14,6 @@ const ToastMessage = () => {
   const toastVisible = useRecoilValue(toastVisibleState);
   const {type, message} = useRecoilValue(toastState);
   const [isVisible, setIsVisible] = React.useState(false);
-  const title = type.charAt(0).toUpperCase() + type.slice(1);
 
   React.useEffect(() => {
     setIsVisible(toastVisible);
