@@ -8,17 +8,22 @@ export interface TodoType {
   date: string;
 }
 
-export interface MonthTodosType {
+export interface MonthTodoListType {
   [date: string]: TodoType[];
 }
 
 export interface AllTodosType {
-  [yearMonth: string]: MonthTodosType;
+  [yearMonth: string]: MonthTodoListType;
 }
 
 export const todoListState = atom<TodoType[]>({
   key: 'todo-list-state',
   default: [],
+});
+
+export const monthTodoListState = atom<MonthTodoListType>({
+  key: 'monthTodoListState',
+  default: {},
 });
 
 export const todosSelector = selector<TodoType[][]>({
@@ -64,6 +69,7 @@ export const newTaskState = atom({
   default: '',
 });
 
+//ToastMessage State
 export const toastVisibleState = atom({
   key: 'toast-visible-state',
   default: false,

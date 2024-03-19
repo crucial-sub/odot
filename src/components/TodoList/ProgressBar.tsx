@@ -1,12 +1,14 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {useRecoilState} from 'recoil';
+import {useRecoilValue} from 'recoil';
 import {todoListState} from '../../recoil';
 
 const ProgressBar = () => {
-  const [todoList, setTodoList] = useRecoilState(todoListState);
-  const totalCount = todoList.length;
-  const doneCount: number = todoList.filter(list => list.isCompleted).length;
+  const todoList = useRecoilValue(todoListState);
+  const totalCount = todoList ? todoList.length : 0;
+  const doneCount: number = todoList
+    ? todoList.filter(list => list.isCompleted).length
+    : 0;
 
   return (
     <View style={styles.progressWrapper}>

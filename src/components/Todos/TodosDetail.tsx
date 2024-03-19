@@ -7,7 +7,7 @@ import {
   getStorageData,
   saveStorageData,
 } from '../../lib/storage-helper';
-import {MonthTodosType, TodoType, todoListState} from '../../recoil';
+import {MonthTodoListType, TodoType, todoListState} from '../../recoil';
 import Todo from '../TodoList/Todo';
 
 const TodosDetail = () => {
@@ -24,10 +24,10 @@ const TodosDetail = () => {
     });
     const yearMonth: string = selectedDate.slice(0, 7);
     const today = selectedDate.slice(8, 10);
-    const monthTodos: MonthTodosType = await getStorageData(
+    const monthTodos: MonthTodoListType = await getStorageData(
       'todos-' + yearMonth,
     );
-    const updatedTodos: MonthTodosType = {
+    const updatedTodos: MonthTodoListType = {
       ...monthTodos,
       [today]: [...newTodos],
     };

@@ -2,7 +2,11 @@ import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {useRecoilState} from 'recoil';
 import {getStorageData, saveStorageData} from '../../lib/storage-helper';
-import {newTaskState} from '../../recoil';
+import {
+  MonthTodoListType,
+  monthTodoListState,
+  newTaskState,
+} from '../../recoil';
 import {getTransformedDate} from '../../utils/getTransformedDate';
 import useToastMessage from '../hooks/useToastMessage';
 
@@ -10,6 +14,8 @@ interface PropsType {}
 
 const AddTaskButton = ({}: PropsType) => {
   const [newTask, setNewTask] = useRecoilState(newTaskState);
+  const [storedMonthTodoList, setMonthTodoList] =
+    useRecoilState(monthTodoListState);
   const {showToast} = useToastMessage();
   const handleAddTask = () => {
     if (!newTask) {
@@ -18,7 +24,7 @@ const AddTaskButton = ({}: PropsType) => {
     }
     const addTodo = async () => {
       const currentDate = getTransformedDate(new Date());
-      const yearMonth: string = currentDate.slice(0, 7);
+      const currentMonthKey: string = currentDate.slice(0, 7);
       const today = currentDate.slice(8, 10);
       const todo = {
         id: Date.now(),
@@ -26,20 +32,25 @@ const AddTaskButton = ({}: PropsType) => {
         isCompleted: false,
         date: currentDate,
       };
-      const monthTodos = await getStorageData('todos-' + yearMonth);
-      if (!monthTodos) {
-        await saveStorageData('todos-' + yearMonth, {[today]: [todo]});
-      } else if (!monthTodos[today]) {
-        await saveStorageData('todos-' + yearMonth, {
-          ...monthTodos,
+      const storedMonthTodoList = await getStorageData(
+        'todos-' + currentMonthKey,
+      );
+      let newList: MonthTodoListType;
+      if (!storedMonthTodoList) {
+        newList = {[today]: [todo]};
+      } else if (!storedMonthTodoList[today]) {
+        newList = {
+          ...storedMonthTodoList,
           [today]: [todo],
-        });
+        };
       } else {
-        await saveStorageData('todos-' + yearMonth, {
-          ...monthTodos,
-          [today]: [...monthTodos[today], todo],
-        });
+        newList = {
+          ...storedMonthTodoList,
+          [today]: [...storedMonthTodoList[today], todo],
+        };
       }
+      await saveStorageData('todos-' + currentMonthKey, newList);
+      setMonthTodoList(newList);
     };
     addTodo();
     showToast('success', 'The task has been added successfully!');
