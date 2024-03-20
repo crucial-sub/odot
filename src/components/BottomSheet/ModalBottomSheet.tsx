@@ -6,14 +6,12 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import {useRecoilValue} from 'recoil';
-import {bottomSheetState} from '../../recoil';
 import useBottomSheet from '../hooks/useBottomSheet';
 
 const SHEET_HEIGHT = 401;
 
 const ModalBottomSheet = () => {
-  const {isGlobalVisible, content} = useRecoilValue(bottomSheetState);
+  const {isGlobalVisible, content} = useBottomSheet();
   const [isLocalVisible, setIsLocalVisible] = React.useState(isGlobalVisible);
   const {hideBottomSheet} = useBottomSheet();
   const handlePress = () => {

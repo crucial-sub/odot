@@ -1,5 +1,5 @@
 import {ReactElement} from 'react';
-import {useSetRecoilState} from 'recoil';
+import {useRecoilState, useSetRecoilState} from 'recoil';
 import {bottomSheetState} from '../../recoil';
 
 type ShowBottomSheetPropsType = {
@@ -7,7 +7,7 @@ type ShowBottomSheetPropsType = {
 };
 
 const useBottomSheet = () => {
-  const setSheetState = useSetRecoilState(bottomSheetState);
+  const [sheetState, setSheetState] = useRecoilState(bottomSheetState);
 
   const showBottomSheet = ({content}: ShowBottomSheetPropsType) => {
     setSheetState({
@@ -26,6 +26,7 @@ const useBottomSheet = () => {
   return {
     showBottomSheet,
     hideBottomSheet,
+    ...sheetState,
   };
 };
 
