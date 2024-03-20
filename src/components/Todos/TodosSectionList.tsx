@@ -79,6 +79,7 @@ const TodosSectionList = () => {
       renderItem={renderItem}
       keyExtractor={keyExtractor}
       renderSectionHeader={renderSectionHeader}
+      initialNumToRender={20}
     />
   );
 };
