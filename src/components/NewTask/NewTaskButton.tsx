@@ -8,7 +8,7 @@ const NewTaskButton = () => {
   const {showBottomSheet} = useBottomSheet();
 
   const handlePress = () => {
-    showBottomSheet(<NewTaskModalContents />);
+    showBottomSheet({content: <NewTaskModalContents />});
   };
   return (
     <TouchableOpacity onPress={handlePress} style={styles.buttonWrapper}>
