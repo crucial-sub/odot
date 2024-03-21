@@ -2,11 +2,9 @@ import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import {RecoilRoot} from 'recoil';
-import MainScreen from './screens/MainScreen';
-import {RecoilEnv} from 'recoil';
 import ToastMessage from './components/ToastMessage/ToastMessage';
-
-RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
+import MainScreen from './screens/MainScreen';
+import ModalBottomSheet from './components/BottomSheet/ModalBottomSheet';
 
 function App(): React.JSX.Element {
   return (
@@ -14,6 +12,7 @@ function App(): React.JSX.Element {
       <NavigationContainer>
         <MainScreen />
         <ToastMessage />
+        <ModalBottomSheet />
       </NavigationContainer>
     </RecoilRoot>
   );

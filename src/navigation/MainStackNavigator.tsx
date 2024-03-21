@@ -1,7 +1,6 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import NewTaskScreen from '../screens/NewTaskScreen';
 import TodoListScreen from '../screens/TodoListScreen';
 import TodosGroupScreen from '../screens/TodosGroupScreen';
 import TodosDetailScreen from '../screens/TodosDetailScreen';
@@ -14,7 +13,6 @@ const MainStackNavigator = () => {
       screenOptions={{headerShown: false}}
       initialRouteName="TodoList">
       <MainStack.Screen name="TodoList" component={TodoListScreen} />
-      <MainStack.Screen name="NewTask" component={NewTaskScreen} />
       <MainStack.Screen name="TodosGroup" component={TodosGroupScreen} />
       <MainStack.Screen name="TodosDetail" component={TodosDetailScreen} />
     </MainStack.Navigator>

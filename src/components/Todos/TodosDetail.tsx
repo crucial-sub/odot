@@ -7,8 +7,7 @@ import {
   getStorageData,
   saveStorageData,
 } from '../../lib/storage-helper';
-import {todoListState} from '../../recoil';
-import {MonthTodosType, TodoType} from '../../types';
+import {MonthTodosType, TodoType, todoListState} from '../../recoil';
 import Todo from '../TodoList/Todo';
 
 const TodosDetail = () => {

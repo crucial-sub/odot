@@ -1,3 +1,4 @@
+import {ReactElement} from 'react';
 import {atom, selector} from 'recoil';
 
 export interface TodoType {
@@ -16,12 +17,12 @@ export interface AllTodosType {
 }
 
 export const todoListState = atom<TodoType[]>({
-  key: 'todoListState',
+  key: 'todo-list-state',
   default: [],
 });
 
 export const todosSelector = selector<TodoType[][]>({
-  key: 'TodosSelector',
+  key: 'todos-selector',
   get: ({get}) => {
     const defaultTodos: any = [];
     const todayTodos = get(todoListState);
@@ -33,12 +34,12 @@ export const todosSelector = selector<TodoType[][]>({
 });
 
 export const allTodosState = atom<AllTodosType>({
-  key: 'allTodosState',
+  key: 'all-todos-state',
   default: {},
 });
 
 export const allTodosSelector = selector<AllTodosType>({
-  key: 'allTodosSelector',
+  key: 'all-todos-selector',
   get: async ({get}) => {
     const defaultAllTodos = get(allTodosState);
     const todayTodos = get(todoListState);
@@ -59,12 +60,12 @@ export const allTodosSelector = selector<AllTodosType>({
 });
 
 export const newTaskState = atom({
-  key: 'newTaskState',
+  key: 'new-task-state',
   default: '',
 });
 
 export const toastVisibleState = atom({
-  key: 'toastVisibleState',
+  key: 'toast-visible-state',
   default: false,
 });
 
@@ -76,9 +77,20 @@ export interface ToastMessageType {
 }
 
 export const toastState = atom<ToastMessageType>({
-  key: 'toastState',
+  key: 'toast-state',
   default: {
     type: '' as ToastType,
     message: '',
   },
+});
+
+//BottomSheet State
+export interface BottomSheetType {
+  isGlobalVisible: boolean;
+  content: ReactElement | null;
+}
+
+export const bottomSheetState = atom<BottomSheetType>({
+  key: 'bottom-sheet-state',
+  default: {isGlobalVisible: false, content: null},
 });

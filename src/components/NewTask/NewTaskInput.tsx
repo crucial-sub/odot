@@ -10,38 +10,26 @@ const NewTaskInput = () => {
   };
 
   return (
-    <View style={styles.taskInputWrapper}>
+    <View style={styles.wrapper}>
       <TextInput
         style={styles.taskInput}
         value={newTask}
         onChangeText={handleChangeValue}
         placeholder="tell me what you gonna do today!"
+        multiline={true}
       />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  taskInputWrapper: {width: '100%'},
-  taskInput: {
-    borderRadius: 50,
-    height: 40,
-    backgroundColor: '#ffffff',
-    shadowColor: '#0000000D',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 2,
-    shadowRadius: 0,
-    paddingHorizontal: 17,
-    fontWeight: '600',
-  },
-  addTaskButton: {
-    flex: 1,
+  wrapper: {
     width: '100%',
-    height: 45,
-    backgroundColor: '#FF7461',
+    height: 236,
+  },
+  taskInput: {
+    fontWeight: '600',
+    lineHeight: 18,
   },
 });
 

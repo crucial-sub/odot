@@ -1,13 +1,14 @@
-import {useNavigation} from '@react-navigation/core';
 import React from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import AddButtonIcon from '../../assets/images/add-button.svg';
+import useBottomSheet from '../hooks/useBottomSheet';
+import NewTaskModalContents from './NewTaskModalContents';
 
 const NewTaskButton = () => {
-  const navigation = useNavigation();
+  const {showBottomSheet} = useBottomSheet();
 
   const handlePress = () => {
-    navigation.navigate('NewTask' as never);
+    showBottomSheet({content: <NewTaskModalContents />});
   };
   return (
     <TouchableOpacity onPress={handlePress} style={styles.buttonWrapper}>
@@ -16,7 +17,7 @@ const NewTaskButton = () => {
   );
 };
 
-export default NewTaskButton;
+export default React.memo(NewTaskButton);
 
 const styles = StyleSheet.create({
   buttonWrapper: {
