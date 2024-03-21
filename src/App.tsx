@@ -11,8 +11,8 @@ function App(): React.JSX.Element {
     <RecoilRoot>
       <NavigationContainer>
         <MainScreen />
-        <ToastMessage />
         <ModalBottomSheet />
+        <ToastMessage />
       </NavigationContainer>
     </RecoilRoot>
   );

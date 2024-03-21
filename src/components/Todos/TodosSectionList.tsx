@@ -7,9 +7,9 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {getAllItems, saveStorageData} from '../../lib/storage-helper';
-import {AllTodosType, TodoType} from '../../recoil';
-import {getTransformedDate} from '../../utils/getTransformedDate';
+import {useSetRecoilState} from 'recoil';
+import {getAllTodoList} from '../../lib/storage-helper';
+import {AllTodosType, TodoType, selectedDateState} from '../../recoil';
 
 type SectionType = {
   title: string;
@@ -19,40 +19,31 @@ type SectionType = {
 const TodosSectionList = () => {
   const navigation = useNavigation();
   const isFocused = useIsFocused();
-  const currentDate = getTransformedDate(new Date());
-  const yearMonth: string = currentDate.slice(0, 7);
-  const today = currentDate.slice(8, 10);
-  const [allTodos, setAllTodos] = React.useState<AllTodosType>({});
+  const [sections, setSections] = React.useState<SectionType[]>([]);
+  const setSelectedDate = useSetRecoilState(selectedDateState);
 
-  const sections: SectionType[] = React.useMemo(
-    () =>
-      Object.entries(allTodos).map(([title, data]) => {
-        return {
-          title: title,
-          data: Object.entries(data)
-            .map(([_, todoList]) => [...todoList])
-            .reverse(),
-        };
-      }),
-    [allTodos],
-  );
   const handleDayTodos = async (date: string) => {
-    await saveStorageData('selected-date', date);
+    setSelectedDate(date);
     navigation.navigate('TodosDetail' as never);
   };
 
   React.useEffect(() => {
-    const getAllTodos = async () => {
-      const allItems = await getAllItems();
-      const allTodos = Object.fromEntries(
-        Object.entries(allItems)
-          .filter(entry => entry[0].includes('todos-'))
-          .map(([key, value]: any) => [key.slice(6, 13), value]),
+    const loadTodoList = async () => {
+      const allTodoList = await getAllTodoList();
+      const sortedMonthKeys = Object.keys(allTodoList).sort((a, b) =>
+        b.localeCompare(a),
       );
-      if (!allTodos[yearMonth] || !allTodos[yearMonth][today]) return;
-      setAllTodos(prev => ({...prev, ...allTodos}));
+
+      const sections: SectionType[] = sortedMonthKeys.map(key => ({
+        title: key,
+        data: Object.entries(allTodoList[key])
+          .map(([_, todos]) => [...todos])
+          .sort((a, b) => b[0].date.localeCompare(a[0].date)),
+      }));
+      setSections(sections);
     };
-    if (isFocused) getAllTodos();
+
+    loadTodoList();
   }, [isFocused]);
 
   const renderItem = ({item}: {item: TodoType[]}) => {
@@ -88,6 +79,7 @@ const TodosSectionList = () => {
       renderItem={renderItem}
       keyExtractor={keyExtractor}
       renderSectionHeader={renderSectionHeader}
+      initialNumToRender={20}
     />
   );
 };

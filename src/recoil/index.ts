@@ -1,6 +1,7 @@
 import {ReactElement} from 'react';
-import {atom, selector} from 'recoil';
+import {atom} from 'recoil';
 
+// Todo State
 export interface TodoType {
   id: number;
   contents: string;
@@ -8,12 +9,12 @@ export interface TodoType {
   date: string;
 }
 
-export interface MonthTodosType {
+export interface MonthTodoListType {
   [date: string]: TodoType[];
 }
 
 export interface AllTodosType {
-  [yearMonth: string]: MonthTodosType;
+  [monthKey: string]: MonthTodoListType;
 }
 
 export const todoListState = atom<TodoType[]>({
@@ -21,42 +22,9 @@ export const todoListState = atom<TodoType[]>({
   default: [],
 });
 
-export const todosSelector = selector<TodoType[][]>({
-  key: 'todos-selector',
-  get: ({get}) => {
-    const defaultTodos: any = [];
-    const todayTodos = get(todoListState);
-    const result = todayTodos.length
-      ? [[...todayTodos], ...defaultTodos]
-      : [...defaultTodos];
-    return result;
-  },
-});
-
-export const allTodosState = atom<AllTodosType>({
-  key: 'all-todos-state',
+export const monthTodoListState = atom<MonthTodoListType>({
+  key: 'month-todo-list-state',
   default: {},
-});
-
-export const allTodosSelector = selector<AllTodosType>({
-  key: 'all-todos-selector',
-  get: async ({get}) => {
-    const defaultAllTodos = get(allTodosState);
-    const todayTodos = get(todoListState);
-    if (todayTodos.length) {
-      const todayYearMonth = todayTodos[0].date.slice(0, 7);
-      const todayDate = todayTodos[0].date.slice(8, 10);
-      return {
-        ...defaultAllTodos,
-        ...{
-          [todayYearMonth]: {
-            ...defaultAllTodos[todayYearMonth],
-            [todayDate]: [...todayTodos],
-          },
-        },
-      };
-    } else return {...defaultAllTodos};
-  },
 });
 
 export const newTaskState = atom({
@@ -64,6 +32,12 @@ export const newTaskState = atom({
   default: '',
 });
 
+export const selectedDateState = atom({
+  key: 'selected-date',
+  default: '',
+});
+
+// ToastMessage State
 export const toastVisibleState = atom({
   key: 'toast-visible-state',
   default: false,
@@ -84,7 +58,7 @@ export const toastState = atom<ToastMessageType>({
   },
 });
 
-//BottomSheet State
+// BottomSheet State
 export interface BottomSheetType {
   isGlobalVisible: boolean;
   content: ReactElement | null;
