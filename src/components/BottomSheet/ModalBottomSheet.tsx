@@ -41,11 +41,11 @@ const ModalBottomSheet = () => {
       height.value = startY.value - event.translationY;
     })
     .onEnd(() => {
-      if (height.value >= SHEET_HEIGHT && height.value < 550) {
+      if (height.value >= SHEET_HEIGHT - 100 && height.value < 550) {
         height.value = withSpring(SHEET_HEIGHT);
       } else if (height.value >= 550) {
         height.value = withSpring(MAX_HEIGHT);
-      } else if (height.value < SHEET_HEIGHT) {
+      } else if (height.value < SHEET_HEIGHT - 100) {
         runOnJS(hideBottomSheet)();
       }
     });
