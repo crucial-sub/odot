@@ -5,11 +5,12 @@ import {RecoilRoot} from 'recoil';
 import ToastMessage from './components/ToastMessage/ToastMessage';
 import MainScreen from './screens/MainScreen';
 import ModalBottomSheet from './components/BottomSheet/ModalBottomSheet';
+import {navigationRef} from './lib/navigation';
 
 function App(): React.JSX.Element {
   return (
     <RecoilRoot>
-      <NavigationContainer>
+      <NavigationContainer ref={navigationRef}>
         <MainScreen />
         <ModalBottomSheet />
         <ToastMessage />
