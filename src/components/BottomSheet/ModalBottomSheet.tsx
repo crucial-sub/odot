@@ -100,7 +100,9 @@ const ModalBottomSheet = () => {
         </Animated.View>
         <Animated.View style={[styles.sheetWrapper, sheetAnimatedStyle]}>
           <GestureDetector gesture={panGestureEvent}>
-            <View style={styles.handler}></View>
+            <View style={styles.handlerWrapper}>
+              <View style={styles.handler} />
+            </View>
           </GestureDetector>
           {content}
         </Animated.View>
@@ -128,20 +130,23 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    // height: SHEET_HEIGHT,
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
     backgroundColor: '#FFFFFF',
     paddingHorizontal: 25,
     paddingBottom: 25,
-    // paddingTop: 10,
+  },
+  handlerWrapper: {
+    width: 80,
+    height: 30,
+    alignSelf: 'center',
+    alignItems: 'center',
   },
   handler: {
     width: 40,
     height: 6,
     backgroundColor: 'lightgrey',
     borderRadius: 3,
-    alignSelf: 'center',
     marginVertical: 10,
   },
 });
