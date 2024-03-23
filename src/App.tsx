@@ -5,17 +5,21 @@ import {RecoilRoot} from 'recoil';
 import ToastMessage from './components/ToastMessage/ToastMessage';
 import MainScreen from './screens/MainScreen';
 import ModalBottomSheet from './components/BottomSheet/ModalBottomSheet';
+import 'react-native-gesture-handler';
 import {navigationRef} from './lib/navigation';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 function App(): React.JSX.Element {
   return (
-    <RecoilRoot>
-      <NavigationContainer ref={navigationRef}>
-        <MainScreen />
-        <ModalBottomSheet />
-        <ToastMessage />
-      </NavigationContainer>
-    </RecoilRoot>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <RecoilRoot>
+        <NavigationContainer ref={navigationRef}>
+          <MainScreen />
+          <ModalBottomSheet />
+          <ToastMessage />
+        </NavigationContainer>
+      </RecoilRoot>
+    </GestureHandlerRootView>
   );
 }
 

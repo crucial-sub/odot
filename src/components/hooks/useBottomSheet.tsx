@@ -1,5 +1,5 @@
 import {ReactElement} from 'react';
-import {useRecoilState, useSetRecoilState} from 'recoil';
+import {useRecoilState} from 'recoil';
 import {bottomSheetState} from '../../recoil';
 
 type ShowBottomSheetPropsType = {
@@ -17,10 +17,7 @@ const useBottomSheet = () => {
   };
 
   const hideBottomSheet = () => {
-    setSheetState({
-      isGlobalVisible: false,
-      content: null,
-    });
+    setSheetState(prev => ({...prev, isGlobalVisible: false}));
   };
 
   return {
