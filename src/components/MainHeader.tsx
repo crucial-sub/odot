@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/core';
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {ImageAssets} from '../assets/images/ImageAssets';
 import HamburgerIcon from '../assets/images/hamburger.svg';
@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginTop: Platform.OS === 'android' ? 20 : null,
   },
   headerText: {
     fontSize: 16,

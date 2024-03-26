@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/core';
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import BackIcon from '../assets/images/back.svg';
 
 const StackHeader = ({title}: {title: string}) => {
@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
     flexDirection: 'row',
     alignItems: 'center',
+    marginTop: Platform.OS === 'android' ? 20 : null,
   },
   buttonWrapper: {
     width: 24,
