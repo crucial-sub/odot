@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, Text, View} from 'react-native';
 import Animated, {
   LightSpeedInLeft,
   LightSpeedOutRight,
@@ -46,7 +46,7 @@ export default ToastMessage;
 const styles = StyleSheet.create({
   toastWrapper: {
     position: 'absolute',
-    top: 60,
+    top: Platform.OS === 'ios' ? 60 : 20,
     left: '50%',
     transform: [{translateX: -TOAST_SIZE / 2}],
   },
