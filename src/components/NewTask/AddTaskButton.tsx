@@ -8,6 +8,7 @@ import {
   newTaskState,
 } from '../../recoil';
 import {getCurrentDateItems} from '../../utils';
+import useBottomSheet from '../hooks/useBottomSheet';
 import useToastMessage from '../hooks/useToastMessage';
 
 interface PropsType {}
@@ -17,6 +18,7 @@ const AddTaskButton = ({}: PropsType) => {
   const [storedMonthTodoList, setMonthTodoList] =
     useRecoilState(monthTodoListState);
   const {showToast} = useToastMessage();
+  const {hideBottomSheet} = useBottomSheet();
   const handleAddTask = () => {
     if (!newTask) {
       showToast('warning', 'Please enter what you gonna do today!');
@@ -51,6 +53,7 @@ const AddTaskButton = ({}: PropsType) => {
       setMonthTodoList(newList);
     };
     addTodo();
+    hideBottomSheet();
     showToast('success', 'The task has been added successfully!');
     setNewTask('');
   };
